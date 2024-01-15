@@ -1,0 +1,11 @@
+{
+  "test.ejs": {
+    "layoutPage": "main",
+    "thumb": "/Charts/Chart 6.svg",
+    "description": ""
+  },
+  "recu.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  }
+}

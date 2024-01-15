@@ -1,0 +1,38 @@
+{
+  "routes": [
+    {
+      "path": "/encaissement_Divers",
+      "page": "encaissement_Divers",
+      "layout": "main"
+    },
+    {
+      "path": "/file:///C:/Users/47433/Desktop/testWappApi/public/reports/recu",
+      "page": "file:///C:/Users/47433/Desktop/testWappApi/public/reports/recu"
+    },
+    {
+      "path": "/authentification/LoginPage",
+      "page": "authentification/LoginPage",
+      "layout": "LoginLayout"
+    },
+    {
+      "path": "/Encaissement/encaissement_Diver_Multiple",
+      "page": "Encaissement/encaissement_Diver_Multiple",
+      "layout": "main"
+    },
+    {
+      "path": "/Encaissement/Enc_Divers",
+      "page": "Encaissement/Enc_Divers",
+      "layout": "main"
+    },
+    {
+      "path": "/Encaissement/Encaissement_facture",
+      "page": "Encaissement/Encaissement_facture",
+      "layout": "main"
+    },
+    {
+      "path": "/Encaissement/index",
+      "page": "Encaissement/index",
+      "layout": "main"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+<head>
+    <base href="/reports/">
+    <script src="/dmxAppConnect/dmxAppConnect.js"></script>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer></script>
+    <script src="/dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+    <script src="/dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+    <script src="/dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer></script>
+</head>
+
+<body is="dmx-app" id="recu" dmx-on:load="">
+    <div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{local_tmp_mvt.data.tmp_MvtId+' '+local_tmp_mvt.data.Nro_lettrage+' '+local_tmp_mvt.data.totalAmount+'  '+local_tmp_mvt.data.id_contrat}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <dmx-serverconnect id="serverconnect_Header" url="/api/Encaissement/ReportRequeteheader" dmx-param:tmp_mvtid="local_tmp_mvt.data.tmp_MvtId" dmx-param:totalamount="local_tmp_mvt.data.totalAmount" dmx-param:tmp_s_code="'recu'" dmx-param:tmp_nom="'djouma'" dmx-param:sonmatricule="47433" dmx-param:id_contrat="local_tmp_mvt.data.id_contrat"></dmx-serverconnect>
+    <dmx-serverconnect id="serverconnect_reportfacture" url="/api/Encaissement/ReportRequeteMvtheader" dmx-param:tmp_mvtid="local_tmp_mvt.data.tmp_MvtId" dmx-param:arg_lettrage="local_tmp_mvt.data.Nro_lettrage"></dmx-serverconnect>
+    <dmx-local-manager id="local_tmp_mvt"></dmx-local-manager>
+    <dmx-datetime id="var1"></dmx-datetime>
+    <dmx-value id="dateVar" dmx-bind:value="var1.datetime"></dmx-value>
+
+
+
+
+    <header class="mb-1 sticky-top">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="lh-base col-12 border-1 border-dark align-self-stretch text-start">
+                    <div class="row">
+                        <div class="col-1"><img src="/assets/images/logoEDD.ico" class="w-auto" width="10" height="50"></div>
+                        <div class="col-10">
+                            <h3 class="text-center">Electricite de Djibouti</h3>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="text-center col-12 border-dark border-1 rounded">
+                    <h4 class="text-center w-auto">Reçu N°&nbsp;</h4>
+                </div>
+                <div class="text-center gx-5 col-12">
+                    <div class="row">
+                        <div class="col-4 offset-4 border border-dark border-1 h-25">
+                            <h5>N CONTRAT : {{serverconnect_Header.data.custom[0].id_contrat}}</h5>
+                        </div>
+                        <div class="col h-25">
+                            <h6 class="text-start">DATE : {{var1.datetime.formatDate('dd-MMM-yyyy')}}</h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </header>
+    <main>
+        <div class="container">
+
+
+
+            <div class="row">
+                <div class="pe-0 col-8">
+
+
+                    <ul class="list-group w-75">
+                        <li class="list-group-item h-25">Nom Payeur : {{serverconnect_Header.data.custom[0].nom}}</li>
+                        <li class="list-group-item w-auto h-25">Adresse :&nbsp; {{serverconnect_Header.data.custom[0].adresse}}</li>
+                    </ul>
+                    <ul class="list-group list-group-horizontal mb-0 pb-0 h-50 w-75">
+                        <li class="list-group-item pe-5 gx-4 w-25 h-75">B.P :</li>
+                        <li class="list-group-item w-25 h-75">Adresse :&nbsp; &nbsp;</li>
+                    </ul>
+                </div>
+                <div class="col-4 ps-0">
+                    <ul class="list-group">
+                        <li class="list-group-item">Date :&nbsp;</li>
+                        <li class="list-group-item">N Contrat :&nbsp; {{serverconnect_Header.data.custom[0].id_contrat}}</li>
+                        <li class="list-group-item">N Client : {{serverconnect_Header.data.custom[0].id_client}}</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>N PL :&nbsp;<i><b> {{serverconnect_Header.data.custom[0].id_pl}}&nbsp; &nbsp; &nbsp;</b> </i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; N Compteur:&nbsp; <i><b>&nbsp;{{serverconnect_Header.data.custom[0].code_cpteur1}}&nbsp; </b>&nbsp;</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solde Compte :&nbsp; <i><b>{{serverconnect_Header.data.custom[0].solde_compte}}&nbsp; &nbsp;</b></i></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>Recu le montant de :&nbsp; &nbsp; &nbsp; &nbsp;DJF&nbsp; &nbsp; par notre Caissier :&nbsp;&nbsp;</p>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Trid 1</th>
+                            <th>Trdate 1</th>
+                            <th>Libelle type mvt 1</th>
+                            <th>Num contrat 1</th>
+                            <th>Nro lettrage 1</th>
+                            <th>Montant 1</th>
+                            <th>Ligneno 1</th>
+                            <th>Ltype 1</th>
+                            <th>Sens 1</th>
+                            <th>D 1</th>
+                            <th>C 1</th>
+                            <th>No chq 1</th>
+                        </tr>
+                    </thead>
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect_reportfacture.data.custom" id="tableRepeat2">
+                        <tr>
+                            <td dmx-text="trid_1"></td>
+                            <td dmx-text="trdate_1"></td>
+                            <td dmx-text="libelle_type_mvt_1"></td>
+                            <td dmx-text="num_contrat_1"></td>
+                            <td dmx-text="nro_lettrage_1"></td>
+                            <td dmx-text="montant_1"></td>
+                            <td dmx-text="ligneno_1"></td>
+                            <td dmx-text="ltype_1"></td>
+                            <td dmx-text="sens_1"></td>
+                            <td dmx-text="d_1"></td>
+                            <td dmx-text="c_1"></td>
+                            <td dmx-text="no_chq_1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </main>
+    <footer class="bg-light fixed-bottom border-top border-1 border-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 class="small mb-0 p-1 text-start fw-bolder text-dark h-25" dmx-html="var1.datetime.formatDate('dd-MMM-yyyy hh:mm:ss')">2024-01-02T20:40:38</h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        /*$(window).bind("load", function() {
+    window.print();
+});*/
+
+$(document).ready(function () {
+    window.print();
+});
+      
+    </script>
+
+    <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

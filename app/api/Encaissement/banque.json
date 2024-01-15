@@ -1,0 +1,114 @@
+{
+  "name": "api",
+  "module": "api",
+  "action": "send",
+  "options": {
+    "url": "http://localhost:8100/api/encaissement/BanqueList",
+    "schema": [
+      {
+        "type": "object",
+        "name": "data",
+        "sub": [
+          {
+            "type": "array",
+            "name": "BanqueList",
+            "sub": [
+              {
+                "type": "number",
+                "name": "id_ligne"
+              },
+              {
+                "type": "text",
+                "name": "lib_long"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "name": "headers",
+        "sub": [
+          {
+            "type": "text",
+            "name": "access-control-allow-credentials"
+          },
+          {
+            "type": "text",
+            "name": "content-length"
+          },
+          {
+            "type": "text",
+            "name": "content-type"
+          },
+          {
+            "type": "text",
+            "name": "date"
+          },
+          {
+            "type": "text",
+            "name": "etag"
+          },
+          {
+            "type": "text",
+            "name": "vary"
+          }
+        ]
+      }
+    ]
+  },
+  "output": true,
+  "meta": [
+    {
+      "type": "object",
+      "name": "data",
+      "sub": [
+        {
+          "type": "array",
+          "name": "BanqueList",
+          "sub": [
+            {
+              "type": "number",
+              "name": "id_ligne"
+            },
+            {
+              "type": "text",
+              "name": "lib_long"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "headers",
+      "sub": [
+        {
+          "type": "text",
+          "name": "access-control-allow-credentials"
+        },
+        {
+          "type": "text",
+          "name": "content-length"
+        },
+        {
+          "type": "text",
+          "name": "content-type"
+        },
+        {
+          "type": "text",
+          "name": "date"
+        },
+        {
+          "type": "text",
+          "name": "etag"
+        },
+        {
+          "type": "text",
+          "name": "vary"
+        }
+      ]
+    }
+  ],
+  "outputType": "object"
+}

@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "number",
+        "name": "id_contrat"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "api",
+      "module": "api",
+      "action": "send",
+      "options": {
+        "url": "{{'http://localhost:8100/api/encaissement/read?argument= '+$_GET.id_contrat}}",
+        "schema": [
+          {
+            "type": "object",
+            "name": "data",
+            "sub": [
+              {
+                "type": "array",
+                "name": "headerQuery",
+                "sub": [
+                  {
+                    "type": "text",
+                    "name": "nom"
+                  },
+                  {
+                    "type": "text",
+                    "name": "adresse"
+                  },
+                  {
+                    "type": "text",
+                    "name": "boite_postal"
+                  },
+                  {
+                    "type": "text",
+                    "name": "solde_compte"
+                  },
+                  {
+                    "type": "text",
+                    "name": "code_cpteur"
+                  },
+                  {
+                    "type": "text",
+                    "name": "codepl"
+                  },
+                  {
+                    "type": "text",
+                    "name": "id_contrat"
+                  },
+                  {
+                    "type": "text",
+                    "name": "id_pl"
+                  },
+                  {
+                    "type": "text",
+                    "name": "num_cpteur"
+                  },
+                  {
+                    "type": "text",
+                    "name": "id_client"
+                  },
+                  {
+                    "type": "text",
+                    "name": "position"
+                  },
+                  {
+                    "type": "text",
+                    "name": "suivi_proc_contrat"
+                  },
+                  {
+                    "type": "text",
+                    "name": "lib_court"
+                  },
+                  {
+                    "type": "text",
+                    "name": "solde_compte_2"
+                  },
+                  {
+                    "type": "text",
+                    "name": "sens"
+                  },
+                  {
+                    "type": "text",
+                    "name": "chq_aut"
+                  },
+                  {
+                    "type": "text",
+                    "name": "statut_contrat"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "headers",
+            "sub": [
+              {
+                "type": "text",
+                "name": "access-control-allow-credentials"
+              },
+              {
+                "type": "text",
+                "name": "connection"
+              },
+              {
+                "type": "text",
+                "name": "content-length"
+              },
+              {
+                "type": "text",
+                "name": "content-type"
+              },
+              {
+                "type": "text",
+                "name": "date"
+              },
+              {
+                "type": "text",
+                "name": "etag"
+              },
+              {
+                "type": "text",
+                "name": "keep-alive"
+              },
+              {
+                "type": "text",
+                "name": "vary"
+              }
+            ]
+          }
+        ]
+      },
+      "output": true,
+      "meta": [
+        {
+          "type": "object",
+          "name": "data",
+          "sub": [
+            {
+              "type": "array",
+              "name": "headerQuery",
+              "sub": [
+                {
+                  "type": "text",
+                  "name": "nom"
+                },
+                {
+                  "type": "text",
+                  "name": "adresse"
+                },
+                {
+                  "type": "text",
+                  "name": "boite_postal"
+                },
+                {
+                  "type": "text",
+                  "name": "solde_compte"
+                },
+                {
+                  "type": "text",
+                  "name": "code_cpteur"
+                },
+                {
+                  "type": "text",
+                  "name": "codepl"
+                },
+                {
+                  "type": "text",
+                  "name": "id_contrat"
+                },
+                {
+                  "type": "text",
+                  "name": "id_pl"
+                },
+                {
+                  "type": "text",
+                  "name": "num_cpteur"
+                },
+                {
+                  "type": "text",
+                  "name": "id_client"
+                },
+                {
+                  "type": "text",
+                  "name": "position"
+                },
+                {
+                  "type": "text",
+                  "name": "suivi_proc_contrat"
+                },
+                {
+                  "type": "text",
+                  "name": "lib_court"
+                },
+                {
+                  "type": "text",
+                  "name": "solde_compte_2"
+                },
+                {
+                  "type": "text",
+                  "name": "sens"
+                },
+                {
+                  "type": "text",
+                  "name": "chq_aut"
+                },
+                {
+                  "type": "text",
+                  "name": "statut_contrat"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "name": "headers",
+          "sub": [
+            {
+              "type": "text",
+              "name": "access-control-allow-credentials"
+            },
+            {
+              "type": "text",
+              "name": "connection"
+            },
+            {
+              "type": "text",
+              "name": "content-length"
+            },
+            {
+              "type": "text",
+              "name": "content-type"
+            },
+            {
+              "type": "text",
+              "name": "date"
+            },
+            {
+              "type": "text",
+              "name": "etag"
+            },
+            {
+              "type": "text",
+              "name": "keep-alive"
+            },
+            {
+              "type": "text",
+              "name": "vary"
+            }
+          ]
+        }
+      ],
+      "outputType": "object"
+    }
+  }
+}

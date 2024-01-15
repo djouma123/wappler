@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "number",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argno_contrat"
+      },
+      {
+        "type": "number",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argmt_cash"
+      },
+      {
+        "type": "number",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argmt_cheque"
+      },
+      {
+        "type": "text",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argno_doc"
+      },
+      {
+        "type": "number",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argbanque"
+      },
+      {
+        "type": "number",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argusermaj"
+      },
+      {
+        "type": "text",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argmvtpaye_tx"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "custom",
+        "module": "dbupdater",
+        "action": "custom",
+        "options": {
+          "connection": "postgres",
+          "test": true,
+          "sql": {
+            "query": "call sp_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)",
+            "params": [
+              {
+                "name": ":P1",
+                "value": "{{$_GET.argno_contrat}}",
+                "test": "311449",
+                "recid": 1
+              },
+              {
+                "name": ":P2",
+                "value": "{{$_GET.argmt_cash}}",
+                "test": "1870",
+                "recid": 2
+              },
+              {
+                "name": ":P3",
+                "value": "{{$_GET.argmt_cheque}}",
+                "test": "0",
+                "recid": 3
+              },
+              {
+                "name": ":P4",
+                "value": "{{$_GET.argno_doc}}",
+                "test": "6868687",
+                "recid": 4
+              },
+              {
+                "name": ":P5",
+                "value": "{{$_GET.argbanque}}",
+                "test": "88391",
+                "recid": 5
+              },
+              {
+                "name": ":P6",
+                "value": "{{$_GET.argusermaj}}",
+                "test": "47433",
+                "recid": 6
+              },
+              {
+                "name": ":P7",
+                "value": "{{$_GET.argmvtpaye_tx}}",
+                "test": "",
+                "recid": 7
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "out_nrolettrage",
+            "type": "text"
+          },
+          {
+            "name": "out_id_autremvt",
+            "type": "text"
+          },
+          {
+            "name": "out_id_autremvt2",
+            "type": "text"
+          }
+        ],
+        "outputType": "array"
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{custom[0].out_id_autremvt.length()=='12 '&&' '+custom[0].out_id_autremvt2.length()==12}}",
+          "then": {
+            "steps": {
+              "name": "tmp_MvtId",
+              "module": "core",
+              "action": "setvalue",
+              "options": {
+                "key": "tmp_MvtId",
+                "value": "{{custom[0].out_id_autremvt+'/'+custom[0].out_id_autremvt2}}"
+              },
+              "meta": [
+                {
+                  "name": "out_nrolettrage",
+                  "type": "text"
+                },
+                {
+                  "name": "out_id_autremvt",
+                  "type": "text"
+                },
+                {
+                  "name": "out_id_autremvt2",
+                  "type": "text"
+                }
+              ],
+              "output": true,
+              "outputType": "text"
+            }
+          },
+          "else": {
+            "steps": {
+              "name": "tmp_MvtId",
+              "module": "core",
+              "action": "setvalue",
+              "options": {
+                "key": "tmp_MvtId",
+                "value": "{{custom[0].out_id_autremvt&&custom[0].out_id_autremvt2}}"
+              },
+              "meta": [
+                {
+                  "name": "out_nrolettrage",
+                  "type": "text"
+                },
+                {
+                  "name": "out_id_autremvt",
+                  "type": "text"
+                },
+                {
+                  "name": "out_id_autremvt2",
+                  "type": "text"
+                }
+              ],
+              "outputType": "text",
+              "output": true
+            }
+          }
+        },
+        "outputType": "boolean"
+      }
+    ]
+  }
+}
