@@ -3,7 +3,7 @@
   "module": "api",
   "action": "send",
   "options": {
-    "url": "http://localhost:8100/api/encaissement/BanqueList",
+    "url": "http://localhost:8100/api/encaissement_Facture/BanqueList",
     "schema": [
       {
         "type": "object",
@@ -14,7 +14,7 @@
             "name": "BanqueList",
             "sub": [
               {
-                "type": "number",
+                "type": "text",
                 "name": "id_ligne"
               },
               {
@@ -35,6 +35,10 @@
           },
           {
             "type": "text",
+            "name": "connection"
+          },
+          {
+            "type": "text",
             "name": "content-length"
           },
           {
@@ -48,6 +52,10 @@
           {
             "type": "text",
             "name": "etag"
+          },
+          {
+            "type": "text",
+            "name": "keep-alive"
           },
           {
             "type": "text",
@@ -68,7 +76,7 @@
           "name": "BanqueList",
           "sub": [
             {
-              "type": "number",
+              "type": "text",
               "name": "id_ligne"
             },
             {
@@ -89,6 +97,10 @@
         },
         {
           "type": "text",
+          "name": "connection"
+        },
+        {
+          "type": "text",
           "name": "content-length"
         },
         {
@@ -102,6 +114,10 @@
         {
           "type": "text",
           "name": "etag"
+        },
+        {
+          "type": "text",
+          "name": "keep-alive"
         },
         {
           "type": "text",

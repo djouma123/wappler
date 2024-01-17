@@ -14,7 +14,7 @@
         "module": "api",
         "action": "send",
         "options": {
-          "url": "http://localhost:8100/api/encaissement/nombreecheance?id_contrat=41270",
+          "url": "http://localhost:8100/api/encaissement_Facture/nombreecheance?id_contrat=41270",
           "schema": [
             {
               "type": "object",
@@ -22,13 +22,7 @@
               "sub": [
                 {
                   "type": "array",
-                  "name": "queryEcheance",
-                  "sub": [
-                    {
-                      "type": "text",
-                      "name": "noechu"
-                    }
-                  ]
+                  "name": "queryEcheance"
                 }
               ]
             },
@@ -39,10 +33,6 @@
                 {
                   "type": "text",
                   "name": "access-control-allow-credentials"
-                },
-                {
-                  "type": "text",
-                  "name": "connection"
                 },
                 {
                   "type": "text",
@@ -62,10 +52,6 @@
                 },
                 {
                   "type": "text",
-                  "name": "keep-alive"
-                },
-                {
-                  "type": "text",
                   "name": "vary"
                 }
               ]
@@ -80,13 +66,7 @@
             "sub": [
               {
                 "type": "array",
-                "name": "queryEcheance",
-                "sub": [
-                  {
-                    "type": "text",
-                    "name": "noechu"
-                  }
-                ]
+                "name": "queryEcheance"
               }
             ]
           },
@@ -97,10 +77,6 @@
               {
                 "type": "text",
                 "name": "access-control-allow-credentials"
-              },
-              {
-                "type": "text",
-                "name": "connection"
               },
               {
                 "type": "text",
@@ -117,10 +93,6 @@
               {
                 "type": "text",
                 "name": "etag"
-              },
-              {
-                "type": "text",
-                "name": "keep-alive"
               },
               {
                 "type": "text",

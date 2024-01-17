@@ -22,9 +22,7 @@
       {
         "type": "number",
         "options": {
-          "rules": {
-            "core:required": {}
-          }
+          "rules": {}
         },
         "name": "argmt_cheque"
       },

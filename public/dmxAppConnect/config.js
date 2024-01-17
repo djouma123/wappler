@@ -129,7 +129,11 @@ dmx.config({
         "type": "text",
         "name": "tetGlobal"
       }
-    ]
+    ],
+    "VarListFactures": {
+      "meta": null,
+      "outputType": "object"
+    }
   },
   "facture": {
     "query": [
