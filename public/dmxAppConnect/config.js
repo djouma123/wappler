@@ -166,5 +166,17 @@ dmx.config({
         "name": "id_contrat"
       }
     ]
+  },
+  "EncaissementFature": {
+    "query": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
   }
 });

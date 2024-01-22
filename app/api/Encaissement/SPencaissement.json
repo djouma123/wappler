@@ -79,44 +79,37 @@
               {
                 "name": ":P1",
                 "value": "{{$_GET.argno_contrat}}",
-                "test": "311449",
-                "recid": 1
+                "test": "311449"
               },
               {
                 "name": ":P2",
                 "value": "{{$_GET.argmt_cash}}",
-                "test": "1870",
-                "recid": 2
+                "test": "1870"
               },
               {
                 "name": ":P3",
                 "value": "{{$_GET.argmt_cheque}}",
-                "test": "0",
-                "recid": 3
+                "test": "0"
               },
               {
                 "name": ":P4",
                 "value": "{{$_GET.argno_doc}}",
-                "test": "6868687",
-                "recid": 4
+                "test": "6868687"
               },
               {
                 "name": ":P5",
                 "value": "{{$_GET.argbanque}}",
-                "test": "88391",
-                "recid": 5
+                "test": "88391"
               },
               {
                 "name": ":P6",
                 "value": "{{$_GET.argusermaj}}",
-                "test": "47433",
-                "recid": 6
+                "test": "47433"
               },
               {
                 "name": ":P7",
                 "value": "{{$_GET.argmvtpaye_tx}}",
-                "test": "",
-                "recid": 7
+                "test": "F_202207029815_2_0°"
               }
             ]
           }
@@ -135,8 +128,7 @@
             "name": "out_id_autremvt2",
             "type": "text"
           }
-        ],
-        "outputType": "array"
+        ]
       },
       {
         "name": "",

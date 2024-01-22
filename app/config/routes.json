@@ -28,6 +28,11 @@
       "path": "/Encaissement/index",
       "page": "Encaissement/index",
       "layout": "main"
+    },
+    {
+      "path": "/Encaissement/EncaissementFature",
+      "page": "Encaissement/EncaissementFature",
+      "layout": "main"
     }
   ]
 }

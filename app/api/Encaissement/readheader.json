@@ -13,7 +13,7 @@
       "module": "api",
       "action": "send",
       "options": {
-        "url": "{{'http://localhost:8100/api/encaissement_Facture/read?argument='+$_GET.id_contrat}}",
+        "url": "{{'http://localhost:8100/api/encaissement_Facture/read?id_contrat='+$_GET.id_contrat}}",
         "schema": [
           {
             "type": "object",

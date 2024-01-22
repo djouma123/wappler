@@ -4,6 +4,14 @@
       {
         "type": "number",
         "name": "id_contrat"
+      },
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
       }
     ]
   },
