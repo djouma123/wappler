@@ -3,7 +3,7 @@
 <dmx-toggle id="toggle1"></dmx-toggle>
 <dmx-value id="VarListFactures" onupdated=""></dmx-value>
 <dmx-notifications id="notifies1"></dmx-notifications>
-<dmx-serverconnect id="serverSPencaissement" url="/api/Encaissement/SPencaissement" dmx-on:success="notifies1.success(lastError.response.message);serverListesFactures.reset();serverLHeadReader.reset()" dmx-on:error="notifies1.danger(lastError.response.message)"></dmx-serverconnect>
+<dmx-serverconnect id="serverSPencaissement" url="/api/Encaissement/SPencaissement" dmx-on:success="notifies1.success('Encaissement effectuer avec succes');serverListesFactures.reset();serverLHeadReader.reset();input1.setValue();montantLiquide.setValue();MontantCheque.setValue();NroDoc.setValue();select2.setSelectedIndex()" dmx-on:error="notifies1.danger(lastError.response.message)"></dmx-serverconnect>
 <div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" dmx-on:focus="modal1.update()">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -32,7 +32,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary w-100" dmx-on:click="modal1.hide();serverSPencaissement.load({argno_contrat: input1.value, argmt_cash: montantLiquide.value, argmt_cheque: MontantCheque.value, argno_doc: NroDoc.value, argbanque: banque.value, argusermaj: 47433, argmvtpaye_tx: VarListFactures.value})" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
+                <button type="button" class="btn btn-primary w-100" dmx-on:click="modal1.hide();serverSPencaissement.load({argno_contrat: input1.value, argmt_cash: montantLiquide.value, argmt_cheque: MontantCheque.value, argno_doc: NroDoc.value, argbanque: banque.value, argusermaj: 47433, argmvtpaye_tx: VarListFactures.value.replace('&quot;', '')})" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
                 </button>
             </div>
         </div>
@@ -91,13 +91,13 @@
         <div class="mt-2 col-2">
             <div class="form-group mb-3">
                 <label for="montantLiquide" class="form-label"><b>Montant liquide</b></label>
-                <input type="number" class="form-control" id="montantLiquide" name="input3" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="">
+                <input type="number" class="form-control" id="montantLiquide" name="input3" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
             </div>
         </div>
         <div class="mt-2 col-2">
             <div class="form-group mb-3">
                 <label for="MontantCheque" class="form-label"><b>Montant Cheque</b></label>
-                <input type="number" class="form-control" id="MontantCheque" name="input4" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="">
+                <input type="number" class="form-control" id="MontantCheque" name="input4" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
             </div>
         </div>
         <div class="mt-2 col-2">
@@ -223,7 +223,7 @@
     <div class="row mt-4 mb-5 pt-2 pb-0">
         <div class="col-9">
             <div class="form-group mb-3">
-                <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.update();modal1.show();modal1.form1.total.setValue(montantLiquide.value+MontantCheque.value)">Mise A jour</button>
+                <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.update();modal1.show();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber())">Mise A jour</button>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input ms-5" type="checkbox" id="input5" name="input5" is="dmx-checkbox" value="">
                     <label class="form-check-label" for="input5">Imprimer Recu</label>
@@ -290,14 +290,14 @@
 
     if (parseInt(document.getElementById("MontantAffecteValue").innerHTML)>0)
     {
-        var total = Intl.NumberFormat().format(totalDebit + document.getElementById('MontantCheque').value)
+        var total = Intl.NumberFormat().format(totalDebit + parseInt(document.getElementById('MontantCheque').value))
     document.getElementById('TotalMontant').innerHTML = "TOTAL : " + total;
 
     selectedData.forEach(data => {
-    tmp_mvtpaye_tx += data.ltype +"_" +data.trid+ "_" +data.typeMvt+"_"+data.montant_tva+"°"
+    tmp_mvtpaye_tx +=data.ltype+"§"+data.trid+"§"+data.typeMvt+"§"+data.montant_tva+"¿"
     });
 
-    dmx.parse("content.VarListFactures.setValue('" + JSON.stringify(tmp_mvtpaye_tx) +"')");
+    dmx.parse("content.VarListFactures.setValue('"+JSON.stringify(tmp_mvtpaye_tx)+"')");
     //dmx.app.data.content.var5.Value= tmp_mvtpaye_tx;
     localStorage.setItem('dmxState-new', JSON.stringify(tmp_mvtpaye_tx));
     console.log(dmx);
