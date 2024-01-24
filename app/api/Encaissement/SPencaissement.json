@@ -2,16 +2,16 @@
   "meta": {
     "$_GET": [
       {
-        "type": "number",
+        "type": "text",
         "options": {
           "rules": {
             "core:required": {}
           }
         },
-        "name": "argno_contrat"
+        "name": "id_contrat"
       },
       {
-        "type": "number",
+        "type": "text",
         "options": {
           "rules": {
             "core:required": {}
@@ -20,9 +20,11 @@
         "name": "argmt_cash"
       },
       {
-        "type": "number",
+        "type": "text",
         "options": {
-          "rules": {}
+          "rules": {
+            "core:required": {}
+          }
         },
         "name": "argmt_cheque"
       },
@@ -36,7 +38,7 @@
         "name": "argno_doc"
       },
       {
-        "type": "number",
+        "type": "text",
         "options": {
           "rules": {
             "core:required": {}
@@ -45,7 +47,7 @@
         "name": "argbanque"
       },
       {
-        "type": "number",
+        "type": "text",
         "options": {
           "rules": {
             "core:required": {}
@@ -65,134 +67,23 @@
     ]
   },
   "exec": {
-    "steps": [
-      {
-        "name": "custom",
-        "module": "dbupdater",
-        "action": "custom",
-        "options": {
-          "connection": "postgres",
-          "test": true,
-          "sql": {
-            "query": "call sp_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)",
-            "params": [
-              {
-                "name": ":P1",
-                "value": "{{$_GET.argno_contrat}}",
-                "test": "311449"
-              },
-              {
-                "name": ":P2",
-                "value": "{{$_GET.argmt_cash}}",
-                "test": "1870"
-              },
-              {
-                "name": ":P3",
-                "value": "{{$_GET.argmt_cheque}}",
-                "test": "0"
-              },
-              {
-                "name": ":P4",
-                "value": "{{$_GET.argno_doc}}",
-                "test": "6868687"
-              },
-              {
-                "name": ":P5",
-                "value": "{{$_GET.argbanque}}",
-                "test": "88391"
-              },
-              {
-                "name": ":P6",
-                "value": "{{$_GET.argusermaj}}",
-                "test": "47433"
-              },
-              {
-                "name": ":P7",
-                "value": "{{$_GET.argmvtpaye_tx}}",
-                "test": "F_202207029815_2_0°"
-              }
-            ]
-          }
-        },
-        "output": true,
-        "meta": [
-          {
-            "name": "out_nrolettrage",
-            "type": "text"
-          },
-          {
-            "name": "out_id_autremvt",
-            "type": "text"
-          },
-          {
-            "name": "out_id_autremvt2",
-            "type": "text"
-          }
-        ]
+    "steps": {
+      "name": "",
+      "module": "core",
+      "action": "exec",
+      "options": {
+        "exec": "Spencaissement1",
+        "params": {
+          "id_contrat": "{{$_GET.id_contrat}}",
+          "argmt_cash": "{{$_GET.argmt_cash}}",
+          "argmt_cheque": "{{$_GET.argmt_cheque}}",
+          "argno_doc": "{{$_GET.argno_doc}}",
+          "argbanque": "{{$_GET.argbanque}}",
+          "argusermaj": "{{$_GET.argusermaj}}",
+          "argmvtpaye_tx": "{{$_GET.argmvtpaye_tx}}"
+        }
       },
-      {
-        "name": "",
-        "module": "core",
-        "action": "condition",
-        "options": {
-          "if": "{{custom[0].out_id_autremvt.length()=='12 '&&' '+custom[0].out_id_autremvt2.length()==12}}",
-          "then": {
-            "steps": {
-              "name": "tmp_MvtId",
-              "module": "core",
-              "action": "setvalue",
-              "options": {
-                "key": "tmp_MvtId",
-                "value": "{{custom[0].out_id_autremvt+'/'+custom[0].out_id_autremvt2}}"
-              },
-              "meta": [
-                {
-                  "name": "out_nrolettrage",
-                  "type": "text"
-                },
-                {
-                  "name": "out_id_autremvt",
-                  "type": "text"
-                },
-                {
-                  "name": "out_id_autremvt2",
-                  "type": "text"
-                }
-              ],
-              "output": true,
-              "outputType": "text"
-            }
-          },
-          "else": {
-            "steps": {
-              "name": "tmp_MvtId",
-              "module": "core",
-              "action": "setvalue",
-              "options": {
-                "key": "tmp_MvtId",
-                "value": "{{custom[0].out_id_autremvt&&custom[0].out_id_autremvt2}}"
-              },
-              "meta": [
-                {
-                  "name": "out_nrolettrage",
-                  "type": "text"
-                },
-                {
-                  "name": "out_id_autremvt",
-                  "type": "text"
-                },
-                {
-                  "name": "out_id_autremvt2",
-                  "type": "text"
-                }
-              ],
-              "outputType": "text",
-              "output": true
-            }
-          }
-        },
-        "outputType": "boolean"
-      }
-    ]
+      "output": true
+    }
   }
 }

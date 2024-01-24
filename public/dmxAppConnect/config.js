@@ -151,19 +151,31 @@ dmx.config({
     "localStorage": [
       {
         "type": "text",
-        "name": "tmp_MvtId"
-      },
-      {
-        "type": "text",
-        "name": "Nro_lettrage"
-      },
-      {
-        "type": "text",
-        "name": "totalAmount"
-      },
-      {
-        "type": "text",
         "name": "id_contrat"
+      },
+      {
+        "type": "text",
+        "name": "argmt_cash"
+      },
+      {
+        "type": "text",
+        "name": "argmt_cheque"
+      },
+      {
+        "type": "text",
+        "name": "argno_doc"
+      },
+      {
+        "type": "text",
+        "name": "argbanque"
+      },
+      {
+        "type": "text",
+        "name": "argusermaj"
+      },
+      {
+        "type": "text",
+        "name": "argmvtpaye_tx"
       }
     ]
   },
@@ -176,6 +188,36 @@ dmx.config({
       {
         "type": "text",
         "name": "dir"
+      }
+    ],
+    "localStorage": [
+      {
+        "type": "text",
+        "name": "argmt_cash"
+      },
+      {
+        "type": "text",
+        "name": "argmt_cheque"
+      },
+      {
+        "type": "text",
+        "name": "id_contrat"
+      },
+      {
+        "type": "text",
+        "name": "argno_doc"
+      },
+      {
+        "type": "text",
+        "name": "argbanque"
+      },
+      {
+        "type": "text",
+        "name": "argusermaj"
+      },
+      {
+        "type": "text",
+        "name": "argmvtpaye_tx"
       }
     ]
   }

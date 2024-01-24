@@ -20,26 +20,8 @@
     <script src="/dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer></script>
 </head>
 
-<body is="dmx-app" id="recu" dmx-on:load="">
-    <div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>{{local_tmp_mvt.data.tmp_MvtId+' '+local_tmp_mvt.data.Nro_lettrage+' '+local_tmp_mvt.data.totalAmount+'  '+local_tmp_mvt.data.id_contrat}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <dmx-serverconnect id="serverconnect_Header" url="/api/Encaissement/ReportRequeteheader" dmx-param:tmp_mvtid="local_tmp_mvt.data.tmp_MvtId" dmx-param:totalamount="local_tmp_mvt.data.totalAmount" dmx-param:tmp_s_code="'recu'" dmx-param:tmp_nom="'djouma'" dmx-param:sonmatricule="47433" dmx-param:id_contrat="local_tmp_mvt.data.id_contrat"></dmx-serverconnect>
-    <dmx-serverconnect id="serverconnect_reportfacture" url="/api/Encaissement/ReportRequeteMvtheader" dmx-param:tmp_mvtid="local_tmp_mvt.data.tmp_MvtId" dmx-param:arg_lettrage="local_tmp_mvt.data.Nro_lettrage"></dmx-serverconnect>
+<body is="dmx-app" id="recu" dmx-on:load="modal1.show()">
+    <dmx-serverconnect id="serverconnect_reportfacture" url="/api/Encaissement/ReportRequeteMvt" dmx-param:tmp_mvtid="" dmx-param:arg_lettrage="" dmx-param:id_contrat="local_tmp_mvt.data.id_contrat" dmx-param:argmt_cash="local_tmp_mvt.data.argmt_cash" dmx-param:argmt_cheque="local_tmp_mvt.data.argmt_cheque" dmx-param:argno_doc="local_tmp_mvt.data.argno_doc" dmx-param:argbanque="local_tmp_mvt.data.argbanque" dmx-param:argmvtpaye_tx="local_tmp_mvt.data.argmvtpaye_tx" dmx-param:arguserma="local_tmp_mvt.data.argusermaj"></dmx-serverconnect>
     <dmx-local-manager id="local_tmp_mvt"></dmx-local-manager>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-value id="dateVar" dmx-bind:value="var1.datetime"></dmx-value>
@@ -92,8 +74,8 @@
 
 
                     <ul class="list-group w-75">
-                        <li class="list-group-item h-25">Nom Payeur : {{serverconnect_Header.data.custom[0].nom}}</li>
-                        <li class="list-group-item w-auto h-25">Adresse :&nbsp; {{serverconnect_Header.data.custom[0].adresse}}</li>
+                        <li class="list-group-item h-25">Nom Payeur :&nbsp;</li>
+                        <li class="list-group-item w-auto h-25">Adresse :&nbsp;&nbsp;</li>
                     </ul>
                     <ul class="list-group list-group-horizontal mb-0 pb-0 h-50 w-75">
                         <li class="list-group-item pe-5 gx-4 w-25 h-75">B.P :</li>
@@ -103,15 +85,15 @@
                 <div class="col-4 ps-0">
                     <ul class="list-group">
                         <li class="list-group-item">Date :&nbsp;</li>
-                        <li class="list-group-item">N Contrat :&nbsp; {{serverconnect_Header.data.custom[0].id_contrat}}</li>
-                        <li class="list-group-item">N Client : {{serverconnect_Header.data.custom[0].id_client}}</li>
+                        <li class="list-group-item">N Contrat :&nbsp;&nbsp;</li>
+                        <li class="list-group-item">N Client :&nbsp;</li>
                     </ul>
                 </div>
 
             </div>
             <div class="row">
                 <div class="col">
-                    <p>N PL :&nbsp;<i><b> {{serverconnect_Header.data.custom[0].id_pl}}&nbsp; &nbsp; &nbsp;</b> </i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; N Compteur:&nbsp; <i><b>&nbsp;{{serverconnect_Header.data.custom[0].code_cpteur1}}&nbsp; </b>&nbsp;</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solde Compte :&nbsp; <i><b>{{serverconnect_Header.data.custom[0].solde_compte}}&nbsp; &nbsp;</b></i></p>
+                    <p>N PL :&nbsp;<i><b>&nbsp; &nbsp; &nbsp;&nbsp;</b> </i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; N Compteur:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solde Compte :&nbsp;&nbsp;</p>
                 </div>
             </div>
             <div class="row">

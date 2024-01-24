@@ -1,14 +1,15 @@
-<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="EncaissementFature" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxFormatter:{},dmxBootstrap5Modal:{},dmxNotifications:{},dmxTyped:{},dmxStateManagement:{}}" -->
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="EncaissementFature" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxFormatter:{},dmxBootstrap5Modal:{},dmxNotifications:{},dmxTyped:{},dmxStateManagement:{},dmxBootbox5:{}}" -->
+<dmx-local-manager id="local1"></dmx-local-manager>
 <dmx-query-manager id="query1"></dmx-query-manager>
 <dmx-toggle id="toggle1"></dmx-toggle>
 <dmx-value id="VarListFactures" onupdated=""></dmx-value>
 <dmx-notifications id="notifies1"></dmx-notifications>
-<dmx-serverconnect id="serverSPencaissement" url="/api/Encaissement/SPencaissement" dmx-on:success="notifies1.success('Encaissement effectuer avec succes');serverListesFactures.reset();serverLHeadReader.reset();input1.setValue();montantLiquide.setValue();MontantCheque.setValue();NroDoc.setValue();select2.setSelectedIndex()" dmx-on:error="notifies1.danger(lastError.response.message)"></dmx-serverconnect>
+<dmx-serverconnect id="serverSPencaissement" url="/api/Encaissement/SPencaissement" dmx-on:success="run([{run:{action:`notifies1.success(\'Encaissement effectuer avec succes\')`,outputType:'text'}},{run:{action:`serverListesFactures.reset()`,outputType:'text'}},{run:{action:`serverLHeadReader.reset()`,outputType:'text'}},{run:{action:`input1.setValue()`,outputType:'text'}},{run:{action:`montantLiquide.setValue()`,outputType:'text'}},{run:{action:`MontantCheque.setValue()`,outputType:'text'}},{run:{action:`NroDoc.setValue()`,outputType:'text'}},{run:{action:`select2.setSelectedIndex()`,outputType:'text'}},{'bootbox.prompt':{message:'encaissmenet effectuer avec succes',size:'lg',centerVertical:true,name:'prompt'}}])" dmx-on:error="notifies1.danger(lastError.response.message)"></dmx-serverconnect>
 <div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1" nocloseonclick="true" dmx-on:focus="modal1.update()">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h3 class="modal-title text-primary">Net A Payer :{{form1.total.value}}</h3>
+                <h3 class="modal-title text-primary">Net A Payer :{{form1.total.value}}&nbsp; &nbsp;&nbsp;</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -32,7 +33,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary w-100" dmx-on:click="modal1.hide();serverSPencaissement.load({argno_contrat: input1.value, argmt_cash: montantLiquide.value, argmt_cheque: MontantCheque.value, argno_doc: NroDoc.value, argbanque: banque.value, argusermaj: 47433, argmvtpaye_tx: VarListFactures.value.replace('&quot;', '')})" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
+                <button id="btn1" class="btn" dmx-on:click="run({runJS:{function:'loadOtherPage',outputType:'text'}})">Button</button>
+                <button type="button" class="btn btn-primary w-100" dmx-on:click="run([{setStorage:{key:'id_contrat',value:`input1.value`}},{setStorage:{key:'argmt_cash',value:`montantLiquide.value`}},{setStorage:{key:'argmt_cheque',value:`MontantCheque.value`}},{setStorage:{key:'argno_doc',value:`NroDoc.value`}},{setStorage:{key:'argbanque',value:`banque.value`}},{setStorage:{key:'argusermaj',value:47433}},{setStorage:{key:'argmvtpaye_tx',value:`VarListFactures.value.Replace(\'&quot;\',\'\')`}},{runJS:{function:'loadOtherPage',outputType:'text'}}])" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
                 </button>
             </div>
         </div>
@@ -223,7 +225,7 @@
     <div class="row mt-4 mb-5 pt-2 pb-0">
         <div class="col-9">
             <div class="form-group mb-3">
-                <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.update();modal1.show();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber())">Mise A jour</button>
+                <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal2.show();modal1.update();modal1.show();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber())">Mise A jour</button>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input ms-5" type="checkbox" id="input5" name="input5" is="dmx-checkbox" value="">
                     <label class="form-check-label" for="input5">Imprimer Recu</label>
@@ -296,6 +298,7 @@
     selectedData.forEach(data => {
     tmp_mvtpaye_tx +=data.ltype+"§"+data.trid+"§"+data.typeMvt+"§"+data.montant_tva+"¿"
     });
+    console.log(tmp_mvtpaye_tx)
 
     dmx.parse("content.VarListFactures.setValue('"+JSON.stringify(tmp_mvtpaye_tx)+"')");
     //dmx.app.data.content.var5.Value= tmp_mvtpaye_tx;
@@ -332,4 +335,13 @@
     datas = selectedData;
 
     }
+
+    function loadOtherPage() {
+
+    $("<iframe>")                             // create a new iframe element
+        .hide()                               // make it invisible
+        .attr("src", "/reports/recu.html") // point the iframe to the page you want to print
+        .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+
+}
 </script>
