@@ -1,5 +1,8 @@
 {
   "LoginLayout.ejs": {
     "description": ""
+  },
+  "NormalPage.ejs": {
+    "description": ""
   }
 }

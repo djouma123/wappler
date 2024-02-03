@@ -68,22 +68,68 @@
   },
   "exec": {
     "steps": {
-      "name": "",
-      "module": "core",
-      "action": "exec",
+      "name": "custom",
+      "module": "dbupdater",
+      "action": "custom",
       "options": {
-        "exec": "Spencaissement1",
-        "params": {
-          "id_contrat": "{{$_GET.id_contrat}}",
-          "argmt_cash": "{{$_GET.argmt_cash}}",
-          "argmt_cheque": "{{$_GET.argmt_cheque}}",
-          "argno_doc": "{{$_GET.argno_doc}}",
-          "argbanque": "{{$_GET.argbanque}}",
-          "argusermaj": "{{$_GET.argusermaj}}",
-          "argmvtpaye_tx": "{{$_GET.argmvtpaye_tx}}"
+        "connection": "postgres",
+        "sql": {
+          "query": "select * from Fc_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id_contrat}}",
+              "test": "311289"
+            },
+            {
+              "name": ":P2",
+              "value": "{{$_GET.argmt_cash}}",
+              "test": "38150"
+            },
+            {
+              "name": ":P3",
+              "value": "{{$_GET.argmt_cheque}}",
+              "test": "0"
+            },
+            {
+              "name": ":P4",
+              "value": "{{$_GET.argno_doc}}",
+              "test": "4525"
+            },
+            {
+              "name": ":P5",
+              "value": "{{$_GET.argbanque}}",
+              "test": "390"
+            },
+            {
+              "name": ":P6",
+              "value": "{{$_GET.argusermaj}}",
+              "test": "47433"
+            },
+            {
+              "name": ":P7",
+              "value": "{{$_GET.argmvtpaye_tx}}",
+              "test": "F§202305006100§14§0¿"
+            }
+          ]
         }
       },
-      "output": true
+      "output": true,
+      "meta": [
+        {
+          "name": "out_nrolettrage",
+          "type": "text"
+        },
+        {
+          "name": "out_id_autremvt",
+          "type": "text"
+        },
+        {
+          "name": "out_id_autremvt2",
+          "type": "text"
+        }
+      ],
+      "outputType": "array"
     }
   }
 }

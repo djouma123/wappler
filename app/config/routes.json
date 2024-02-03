@@ -33,6 +33,15 @@
       "path": "/Encaissement/EncaissementFature",
       "page": "Encaissement/EncaissementFature",
       "layout": "main"
+    },
+    {
+      "path": "/Visualisation/Recherche",
+      "page": "Visualisation/Recherche",
+      "layout": "NormalPage"
+    },
+    {
+      "path": "/file:///C:/Users/47433/Desktop/testWappApi/public/reports/index",
+      "page": "file:///C:/Users/47433/Desktop/testWappApi/public/reports/index"
     }
   ]
 }

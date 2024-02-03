@@ -5,7 +5,7 @@
     <base href="/reports/">
     <script src="/dmxAppConnect/dmxAppConnect.js"></script>
     <meta charset="UTF-8">
-    <title>Untitled Document</title>
+    <title></title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,39 +18,40 @@
     <script src="/dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
     <script src="/dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
     <script src="/dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer></script>
+    <link rel="stylesheet" href="/dmxAppConnect/dmxAutocomplete/dmxAutocomplete.css" />
+    <script src="/dmxAppConnect/dmxAutocomplete/dmxAutocomplete.js" defer></script>
 </head>
 
-<body is="dmx-app" id="recu" dmx-on:load="modal1.show()">
-    <dmx-serverconnect id="serverconnect_reportfacture" url="/api/Encaissement/ReportRequeteMvt" dmx-param:tmp_mvtid="" dmx-param:arg_lettrage="" dmx-param:id_contrat="local_tmp_mvt.data.id_contrat" dmx-param:argmt_cash="local_tmp_mvt.data.argmt_cash" dmx-param:argmt_cheque="local_tmp_mvt.data.argmt_cheque" dmx-param:argno_doc="local_tmp_mvt.data.argno_doc" dmx-param:argbanque="local_tmp_mvt.data.argbanque" dmx-param:argmvtpaye_tx="local_tmp_mvt.data.argmvtpaye_tx" dmx-param:arguserma="local_tmp_mvt.data.argusermaj"></dmx-serverconnect>
-    <dmx-local-manager id="local_tmp_mvt"></dmx-local-manager>
+<body id="recu" is="dmx-app" dmx-on:load="run([{serverConnect:{url:'/api/Encaissement/ReportRequeteMvt',site:'EncaissementWapApi',params:{id_contrat:`local1.data.id_contrat`,argmt_cash:`local1.data.argmt_cash`,argmt_cheque:`local1.data.argmt_cheque`,argno_doc:`local1.data.argno_doc`,argbanque:`local1.data.argbanque`,argusermaj:`local1.data.argusermaj`,argmvtpaye_tx:`local1.data.argmvtpaye_tx.replace(\'&quot;\',\'\')`},name:'sc',outputType:'object'}},{runJS:{function:'load',outputType:'text'}}])">
+    <dmx-array id="arr1"></dmx-array>
+    <dmx-serverconnect id="serverconnect2" url="/api/Encaissement/banque"></dmx-serverconnect>
+    <dmx-serverconnect id="serverconnect1" url="/api/Encaissement/ReportRequeteMvt" dmx-param:id_contrat="local1.data.id_contrat" dmx-param:argmt_cash="local1.data.argmt_cash" dmx-param:argmt_cheque="local1.data.argmt_cheque" dmx-param:argno_doc="local1.data.argno_doc" dmx-param:argbanque="local1.data.argbanque" dmx-param:argusermaj="local1.data.argusermaj" dmx-param:argmvtpaye_tx="local1.data.argmvtpaye_tx.replace('&quot;', '')"></dmx-serverconnect>
+    <dmx-local-manager id="local1"></dmx-local-manager>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-value id="dateVar" dmx-bind:value="var1.datetime"></dmx-value>
 
-
-
-
     <header class="mb-1 sticky-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
 
 
                 <div class="lh-base col-12 border-1 border-dark align-self-stretch text-start">
-                    <div class="row">
+                    <div class="row row-cols-1">
                         <div class="col-1"><img src="/assets/images/logoEDD.ico" class="w-auto" width="10" height="50"></div>
                         <div class="col-10">
-                            <h3 class="text-center">Electricite de Djibouti</h3>
+                            <h5 class="text-center">Electricite de Djibouti</h5>
                         </div>
                     </div>
 
 
                 </div>
-                <div class="text-center col-12 border-dark border-1 rounded">
-                    <h4 class="text-center w-auto">Reçu N°&nbsp;</h4>
+                <div class="text-center border-1 rounded border-dark border offset-1 col-10">
+                    <h6 class="text-center w-auto">Reçu N°&nbsp;</h6>
                 </div>
                 <div class="text-center gx-5 col-12">
                     <div class="row">
                         <div class="col-4 offset-4 border border-dark border-1 h-25">
-                            <h5>N CONTRAT : {{serverconnect_Header.data.custom[0].id_contrat}}</h5>
+                            <h6>N CONTRAT :&nbsp;</h6>
                         </div>
                         <div class="col h-25">
                             <h6 class="text-start">DATE : {{var1.datetime.formatDate('dd-MMM-yyyy')}}</h6>
@@ -65,36 +66,49 @@
 
     </header>
     <main>
-        <div class="container">
+        <div class="container-fluid">
 
 
 
             <div class="row">
                 <div class="pe-0 col-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>&nbsp; &nbsp; &nbsp;Nom :&nbsp;</p>
+                            <p>Adresse :&nbsp;</p>
+
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>&nbsp; &nbsp;B.P&nbsp; &nbsp; &nbsp;:</p>
+                                    <p>&nbsp;N PL&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                                </div>
+                                <div class="col">
+                                    <p>Adresse :&nbsp;</p>
+                                    <p>N Compteur :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                                </div>
+                            </div>
 
 
-                    <ul class="list-group w-75">
-                        <li class="list-group-item h-25">Nom Payeur :&nbsp;</li>
-                        <li class="list-group-item w-auto h-25">Adresse :&nbsp;&nbsp;</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal mb-0 pb-0 h-50 w-75">
-                        <li class="list-group-item pe-5 gx-4 w-25 h-75">B.P :</li>
-                        <li class="list-group-item w-25 h-75">Adresse :&nbsp; &nbsp;</li>
-                    </ul>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
                 </div>
                 <div class="col-4 ps-0">
-                    <ul class="list-group">
-                        <li class="list-group-item">Date :&nbsp;</li>
-                        <li class="list-group-item">N Contrat :&nbsp;&nbsp;</li>
-                        <li class="list-group-item">N Client :&nbsp;</li>
-                    </ul>
+
+                    <p>&nbsp; &nbsp; &nbsp; &nbsp; Date :&nbsp;</p>
+                    <p>N Contrat :&nbsp;&nbsp;</p>
+                    <p>&nbsp; &nbsp;N Client :&nbsp;</p>
+                    <p>Solde Compte :</p>
                 </div>
 
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>N PL :&nbsp;<i><b>&nbsp; &nbsp; &nbsp;&nbsp;</b> </i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; N Compteur:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solde Compte :&nbsp;&nbsp;</p>
-                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -102,40 +116,32 @@
                 </div>
             </div>
             <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Trid 1</th>
-                            <th>Trdate 1</th>
-                            <th>Libelle type mvt 1</th>
-                            <th>Num contrat 1</th>
-                            <th>Nro lettrage 1</th>
-                            <th>Montant 1</th>
-                            <th>Ligneno 1</th>
-                            <th>Ltype 1</th>
-                            <th>Sens 1</th>
-                            <th>D 1</th>
-                            <th>C 1</th>
-                            <th>No chq 1</th>
-                        </tr>
-                    </thead>
-                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect_reportfacture.data.custom" id="tableRepeat2">
-                        <tr>
-                            <td dmx-text="trid_1"></td>
-                            <td dmx-text="trdate_1"></td>
-                            <td dmx-text="libelle_type_mvt_1"></td>
-                            <td dmx-text="num_contrat_1"></td>
-                            <td dmx-text="nro_lettrage_1"></td>
-                            <td dmx-text="montant_1"></td>
-                            <td dmx-text="ligneno_1"></td>
-                            <td dmx-text="ltype_1"></td>
-                            <td dmx-text="sens_1"></td>
-                            <td dmx-text="d_1"></td>
-                            <td dmx-text="c_1"></td>
-                            <td dmx-text="no_chq_1"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-start">N Piece</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-start">Type Mouvement</th>
+                                        <th class="text-start">Debit</th>
+                                        <th class="text-start">Credit</th>
+                                    </tr>
+                                </thead>
+                                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat2">
+                                    <tr>
+                                        <td dmx-text="trid_1"></td>
+                                        <td dmx-text="trdate_1"></td>
+                                        <td dmx-text="libelle_type_mvt_1"></td>
+                                        <td dmx-text="d_1.formatCurrency(' ', ' ', ' ', ' ')"></td>
+                                        <td dmx-text="c_1"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -152,14 +158,29 @@
         </div>
     </footer>
     <script>
-        /*$(window).bind("load", function() {
+        /* $(window).bind("load", function() {
     window.print();
 });*/
-
-$(document).ready(function () {
-    window.print();
-});
-      
+ function load() {
+    try 
+    {
+    /*dmx.parse('serverconnect1.load()')*/
+    /*dmx.parse("serverconnect1.load({})");*/
+    setTimeout(() => {
+         window.print();
+      console.log('cest bon');
+    },100)
+     /*window.print();
+      console.log('cest bon');*/
+     }
+catch (e) 
+{
+ if (!(e instanceof Error)) {
+    e = new Error(e);
+  }
+  console.error(e.message);
+}
+ }    
     </script>
 
     <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>

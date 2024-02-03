@@ -1,0 +1,8 @@
+{
+  "bootstrap5": {
+    "basic": {},
+    "advanced": {
+      "navbar-dark-color": "#4850c9"
+    }
+  }
+}

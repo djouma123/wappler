@@ -155,23 +155,23 @@ dmx.config({
       },
       {
         "type": "text",
-        "name": "argmt_cash"
+        "name": "argmt_cash "
       },
       {
         "type": "text",
-        "name": "argmt_cheque"
+        "name": "argmt_cheque  "
       },
       {
         "type": "text",
-        "name": "argno_doc"
+        "name": "argno_doc "
       },
       {
         "type": "text",
-        "name": "argbanque"
+        "name": "argbanque "
       },
       {
         "type": "text",
-        "name": "argusermaj"
+        "name": "argusermaj "
       },
       {
         "type": "text",

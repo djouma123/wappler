@@ -23,18 +23,34 @@
       },
       {
         "type": "text",
+        "name": "argusermaj"
+      },
+      {
+        "type": "text",
         "name": "argmvtpaye_tx"
       },
       {
         "type": "text",
-        "name": "arguserma"
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
       }
     ]
   },
   "exec": {
     "steps": [
       {
-        "name": "",
+        "name": "list",
+        "module": "arraylist",
+        "action": "create",
+        "options": {},
+        "meta": [],
+        "outputType": "array"
+      },
+      {
+        "name": "sp_encaiss",
         "module": "core",
         "action": "exec",
         "options": {
@@ -45,14 +61,25 @@
             "argmt_cheque": "{{$_GET.argmt_cheque}}",
             "argno_doc": "{{$_GET.argno_doc}}",
             "argbanque": "{{$_GET.argbanque}}",
-            "argusermaj": "{{$_GET.arguserma}}",
+            "argusermaj": "{{$_GET.argusermaj}}",
             "argmvtpaye_tx": "{{$_GET.argmvtpaye_tx}}"
           }
         },
         "output": true
       },
       {
-        "name": "custom",
+        "name": "countRow",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "key": "countRow",
+          "value": 0
+        },
+        "meta": [],
+        "outputType": "number"
+      },
+      {
+        "name": "LigneMvt",
         "module": "dbupdater",
         "action": "custom",
         "options": {
@@ -62,16 +89,19 @@
             "params": [
               {
                 "name": ":P1",
-                "value": "{{custom[0].out_id_autremvt}}",
-                "test": "202401500070"
+                "value": "{{sp_encaiss.custom[0].out_id_autremvt}}",
+                "test": "202401500070",
+                "recid": 1
               },
               {
                 "name": ":P2",
-                "value": "{{custom[0].out_nrolettrage}}",
-                "test": "5229797"
+                "value": "{{sp_encaiss.custom[0].out_nrolettrage}}",
+                "test": "5229797",
+                "recid": 2
               }
             ]
-          }
+          },
+          "test": true
         },
         "output": true,
         "meta": [
@@ -124,6 +154,45 @@
             "type": "text"
           }
         ],
+        "outputType": "array"
+      },
+      {
+        "name": "LIGNE",
+        "module": "core",
+        "action": "exec",
+        "options": {
+          "exec": "lignMVTExec"
+        },
+        "output": true
+      },
+      {
+        "name": "",
+        "module": "core",
+        "action": "while",
+        "options": {
+          "while": "{{countRow<=LIGNE.count()}}",
+          "exec": {
+            "steps": {
+              "name": "",
+              "module": "arraylist",
+              "action": "add",
+              "options": {
+                "ref": "list",
+                "value": "{{LIGNE}}"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "listMVT",
+        "module": "arraylist",
+        "action": "value",
+        "options": {
+          "ref": "list"
+        },
+        "output": true,
+        "meta": [],
         "outputType": "array"
       }
     ]

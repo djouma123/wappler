@@ -1,0 +1,242 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="Recherche" appConnect="local" components="{dmxStripe:{},dmxBootstrap5Offcanvas:{},dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{}}" -->
+<div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <link rel="wappler-include" type="content-page" href="Visualisation/Recherche.ejs">
+                <p>{{VarSearchType.value}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<dmx-value id="VarSearchType" dmx-bind:value="0"></dmx-value>
+<meta name="ac:route" content="/Visualisation/Recherche">
+<div class="container-fluid mb-5">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="border-end border-2 border-secondary col-3 h-50">
+
+
+
+
+                    <div class="row h-25 g-0">
+                        <div class="text-end col-12 h-50">
+                            <form id="form1" is="dmx-stripe-checkout-form">
+
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input2" class="col-sm-3 col-form-label offset-0 ps-0 pe-0 text-left">N client</label>
+                                    <div class="col-sm-9 order-1">
+                                        <input type="text" class="form-control me-0 ps-0" id="input2" name="input2" aria-describedby="input2_help" dmx-on:focus="VarSearchType.setValue(1)">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input1" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Nom Client</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input1" name="input1" aria-describedby="input2_help" dmx-on:focus="VarSearchType.setValue(2)">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input3" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">N Contrat</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0 autofocus" id="input3" name="input3" aria-describedby="input2_help" dmx-on:focus="VarSearchType.setValue(3)">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input4" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">N Portable</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input4" name="input4" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input5" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Matricule</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input5" name="input5" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input6" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Boite Postale</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input6" name="input6" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input7" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Type Role</label>
+                                    <div class="col-sm-9">
+                                        <select id="select1" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input8" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Position Cnt.</label>
+                                    <div class="col-sm-9">
+                                        <select id="select2" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input9" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Code Support&nbsp;</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input9" name="input9" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input10" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Numero PL</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input10" name="input10" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input11" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Etat PL</label>
+                                    <div class="col-sm-9">
+                                        <select id="select3" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input12" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">N Compteur</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input12" name="input12" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input13" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Status Social</label>
+                                    <div class="col-sm-9">
+                                        <select id="select6" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input14" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Categ. Tarif</label>
+                                    <div class="col-sm-9">
+                                        <select id="select4" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input15" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Groupe de Fact.</label>
+                                    <div class="col-sm-9">
+                                        <select id="select5" class="form-select">
+                                            <option value="1">Option One</option>
+                                            <option value="2">Option Two</option>
+                                            <option value="3">Option Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input16" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Adresse Phys.</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input16" name="input16" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3 row" is="dmx-input-group">
+                                    <label for="input17" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">PS</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control ps-0" id="input17" name="input17" aria-describedby="input2_help">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-12">
+
+                            <div class="row small font-monospace lh-sm row-cols-6 justify-content-center">
+                                <div class="pe-0 text-center col-6">
+                                    <div is="dmx-radio-group" id="group1" class="radio-group">
+                                        <input id="radio1" type="radio">
+                                        <label>Simple</label>
+                                        <input id="radio2" type="radio">
+                                        <label>Complexe</label>
+                                    </div>
+                                </div>
+                                <div class="col-3 ps-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="input18" name="input18">
+                                        <label class="form-check-label" for="input18">Agent</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+
+                                <div class="col-6">
+                                    <button id="btn1" class="btn w-100 btn-outline-secondary mb-1">Effacer</button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="btn3" class="btn w-100 btn-outline-secondary" dmx-bind:disabled="VarSearchType.value==0" dmx-on:click="modal1.show()">Rechercher</button>
+                                </div>
+                                <div class="col-6 mb-1">
+                                    <button id="btn4" class="btn w-100 btn-outline-secondary">Selectionner</button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="btn5" class="btn w-100 btn-outline-secondary">Fermer</button>
+                                </div>
+                                <div class="col"><button id="btn2" class="btn btn-outline-secondary w-100 ms-0">Imprimer</button></div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col mark bg-secondary"></div>
+                    </div>
+
+
+
+
+
+
+                </div>
+                <div class="col">
+                    <main>
+                        <table class="table table-muted table-striped">
+                            <thead class="thead-dark table-muted">
+                                <tr>
+                                    <th>non</th>
+                                    <th>prenom</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="" id="tableRepeat1">
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
