@@ -5,11 +5,12 @@
     <base href="/reports/">
     <script src="/dmxAppConnect/dmxAppConnect.js"></script>
     <meta charset="UTF-8">
-    <title></title>
+    <title>RECU PAYE</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/bootstrap/5/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
 
@@ -22,19 +23,16 @@
     <script src="/dmxAppConnect/dmxAutocomplete/dmxAutocomplete.js" defer></script>
 </head>
 
-<body id="recu" is="dmx-app" dmx-on:load="run([{serverConnect:{url:'/api/Encaissement/ReportRequeteMvt',site:'EncaissementWapApi',params:{id_contrat:`local1.data.id_contrat`,argmt_cash:`local1.data.argmt_cash`,argmt_cheque:`local1.data.argmt_cheque`,argno_doc:`local1.data.argno_doc`,argbanque:`local1.data.argbanque`,argusermaj:`local1.data.argusermaj`,argmvtpaye_tx:`local1.data.argmvtpaye_tx.replace(\'&quot;\',\'\')`},name:'sc',outputType:'object'}},{runJS:{function:'load',outputType:'text'}}])">
+<body id="recu" is="dmx-app" dmx-on:load="run([{serverConnect:{name:'sc',outputType:'object',url:'/api/Encaissement/ReportRequeteMvt',site:'EncaissementWapApi',params:{id_contrat:`local1.data.id_contrat`,argmt_cash:`local1.data.argmt_cash`,argmt_cheque:`local1.data.argmt_cheque`,argno_doc:`local1.data.argno_doc`,argbanque:`local1.data.argbanque`,argusermaj:`local1.data.argusermaj`,argmvtpaye_tx:`local1.data.argmvtpaye_tx.replace(\'&quot;\',\'\')`}}},{runJS:{outputType:'text',function:'load'}},{runJS:{outputType:'text',function:'javascript:window.addEventListener(\'afterprint\', (event) =&gt; {  console.log(\'After print\');});'}}])" class="style3">
     <dmx-array id="arr1"></dmx-array>
-    <dmx-serverconnect id="serverconnect2" url="/api/Encaissement/banque"></dmx-serverconnect>
     <dmx-serverconnect id="serverconnect1" url="/api/Encaissement/ReportRequeteMvt" dmx-param:id_contrat="local1.data.id_contrat" dmx-param:argmt_cash="local1.data.argmt_cash" dmx-param:argmt_cheque="local1.data.argmt_cheque" dmx-param:argno_doc="local1.data.argno_doc" dmx-param:argbanque="local1.data.argbanque" dmx-param:argusermaj="local1.data.argusermaj" dmx-param:argmvtpaye_tx="local1.data.argmvtpaye_tx.replace('&quot;', '')"></dmx-serverconnect>
     <dmx-local-manager id="local1"></dmx-local-manager>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-value id="dateVar" dmx-bind:value="var1.datetime"></dmx-value>
-
     <header class="mb-1 sticky-top">
+
         <div class="container-fluid">
             <div class="row">
-
-
                 <div class="lh-base col-12 border-1 border-dark align-self-stretch text-start">
                     <div class="row row-cols-1">
                         <div class="col-1"><img src="/assets/images/logoEDD.ico" class="w-auto" width="10" height="50"></div>
@@ -43,15 +41,14 @@
                         </div>
                     </div>
 
-
                 </div>
                 <div class="text-center border-1 rounded border-dark border offset-1 col-10">
-                    <h6 class="text-center w-auto">Reçu N°&nbsp;</h6>
+                    <h6 class="text-center w-auto">Reçu N°&nbsp; {{serverconnect1.data.headers[0].id_recu}}</h6>
                 </div>
                 <div class="text-center gx-5 col-12">
                     <div class="row">
                         <div class="col-4 offset-4 border border-dark border-1 h-25">
-                            <h6>N CONTRAT :&nbsp;</h6>
+                            <h6>N CONTRAT : {{serverconnect1.data.headers[0].id_contrat}}</h6>
                         </div>
                         <div class="col h-25">
                             <h6 class="text-start">DATE : {{var1.datetime.formatDate('dd-MMM-yyyy')}}</h6>
@@ -69,23 +66,22 @@
         <div class="container-fluid">
 
 
-
             <div class="row">
                 <div class="pe-0 col-8">
                     <div class="row">
                         <div class="col-12">
-                            <p>&nbsp; &nbsp; &nbsp;Nom :&nbsp;</p>
-                            <p>Adresse :&nbsp;</p>
+                            <p>&nbsp; &nbsp; &nbsp;Nom : {{serverconnect1.data.headers[0].nom}}</p>
+                            <p>Adresse :&nbsp; {{serverconnect1.data.headers[0].adresse}}</p>
 
                         </div>
                         <div class="col">
                             <div class="row">
                                 <div class="col-3">
-                                    <p>&nbsp; &nbsp;B.P&nbsp; &nbsp; &nbsp;:</p>
-                                    <p>&nbsp;N PL&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                                    <p>&nbsp; &nbsp;B.P&nbsp; &nbsp; &nbsp;: {{serverconnect1.data.headers[0].boite_postal}}</p>
+                                    <p>&nbsp;N PL&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; {{serverconnect1.data.headers[0].codepl}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
                                 </div>
                                 <div class="col">
-                                    <p>Adresse :&nbsp;</p>
+                                    <p>Adresse : {{serverconnect1.data.headers[0].adr_physique}}</p>
                                     <p>N Compteur :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
                                 </div>
                             </div>
@@ -104,9 +100,9 @@
                 <div class="col-4 ps-0">
 
                     <p>&nbsp; &nbsp; &nbsp; &nbsp; Date :&nbsp;</p>
-                    <p>N Contrat :&nbsp;&nbsp;</p>
-                    <p>&nbsp; &nbsp;N Client :&nbsp;</p>
-                    <p>Solde Compte :</p>
+                    <p>N Contrat :&nbsp; {{serverconnect1.data.headers[0].id_contrat}}</p>
+                    <p>&nbsp; &nbsp;N Client : {{serverconnect1.data.headers[0].id_client}}</p>
+                    <p>Solde Compte : {{serverconnect1.data.headers[0].solde_compte}}</p>
                 </div>
 
             </div>
@@ -116,30 +112,51 @@
                 </div>
             </div>
             <div class="row">
-                <div class="table-responsive">
+
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>N Piece</th>
+                                <th>Date</th>
+                                <th>Type Mouvement</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                            </tr>
+                        </thead>
+                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat1">
+                            <tr>
+                                <td dmx-text="trid_1"></td>
+                                <td dmx-text="trdate_1"></td>
+                                <td dmx-text="libelle_type_mvt_1"></td>
+                                <td dmx-text="d_1"></td>
+                                <td dmx-text="c_1"></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <div class="table-responsive">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="text-start">N Piece</th>
-                                        <th class="text-center">Date</th>
-                                        <th class="text-start">Type Mouvement</th>
-                                        <th class="text-start">Debit</th>
-                                        <th class="text-start">Credit</th>
-                                    </tr>
-                                </thead>
-                                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat2">
-                                    <tr>
-                                        <td dmx-text="trid_1"></td>
-                                        <td dmx-text="trdate_1"></td>
-                                        <td dmx-text="libelle_type_mvt_1"></td>
-                                        <td dmx-text="d_1.formatCurrency(' ', ' ', ' ', ' ')"></td>
-                                        <td dmx-text="c_1"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>N Piece</th>
+                                    <th>Date</th>
+                                    <th>Type Mouvement</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat2">
+                                <tr>
+                                    <td dmx-text="trid_1"></td>
+                                    <td dmx-text="trdate_1.formatDate('dd-MMM-yyyy')"></td>
+                                    <td dmx-text="libelle_type_mvt_1"></td>
+                                    <td dmx-text="d_1"></td>
+                                    <td dmx-text="c_1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -181,6 +198,19 @@ catch (e)
   console.error(e.message);
 }
  }    
+
+    //window.addEventListener("afterprint", myFunction)
+ 
+function myFunction() {
+
+    
+   alert("This document is now being printed");
+ 
+   //  window.location.href = "http://localhost:3000/Encaissement/EncaissementFature";
+   
+
+}
+
     </script>
 
     <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>

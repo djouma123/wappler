@@ -34,5 +34,7 @@
     }
   ],
   "activeTarget": "Development",
-  "projectType": "web"
+  "projectType": "web",
+  "extensions": [],
+  "activeGitRemote": "wappler_submit"
 }

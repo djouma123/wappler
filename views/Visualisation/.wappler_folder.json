@@ -1,6 +1,6 @@
 {
   "Recherche.ejs": {
-    "layoutPage": "NormalPage",
+    "layoutPage": "LoginLayout",
     "description": ""
   }
 }

@@ -14,7 +14,7 @@
         "module": "api",
         "action": "send",
         "options": {
-          "url": "http://localhost:8100/api/encaissement_Facture/nombreecheance?id_contrat=41270",
+          "url": "{{'http://localhost:8100/api/encaissement_Facture/nombreecheance?id_contrat='+$_GET.new}}",
           "schema": [
             {
               "type": "object",

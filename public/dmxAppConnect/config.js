@@ -220,5 +220,23 @@ dmx.config({
         "name": "argmvtpaye_tx"
       }
     ]
+  },
+  "Recherche": {
+    "localStorage": [
+      {
+        "type": "text",
+        "name": "Searchcreteria"
+      }
+    ],
+    "global": [
+      {
+        "type": "text",
+        "name": "creteria"
+      }
+    ],
+    "searchCritique": {
+      "meta": null,
+      "outputType": "object"
+    }
   }
 });

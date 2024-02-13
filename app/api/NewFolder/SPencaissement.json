@@ -2,16 +2,16 @@
   "meta": {
     "$_GET": [
       {
-        "type": "text",
+        "type": "number",
         "options": {
           "rules": {
             "core:required": {}
           }
         },
-        "name": "id_contrat"
+        "name": "argno_contrat"
       },
       {
-        "type": "text",
+        "type": "number",
         "options": {
           "rules": {
             "core:required": {}
@@ -20,7 +20,7 @@
         "name": "argmt_cash"
       },
       {
-        "type": "text",
+        "type": "number",
         "options": {
           "rules": {
             "core:required": {}
@@ -38,7 +38,7 @@
         "name": "argno_doc"
       },
       {
-        "type": "text",
+        "type": "number",
         "options": {
           "rules": {
             "core:required": {}
@@ -47,7 +47,7 @@
         "name": "argbanque"
       },
       {
-        "type": "text",
+        "type": "number",
         "options": {
           "rules": {
             "core:required": {}
@@ -73,18 +73,19 @@
       "action": "custom",
       "options": {
         "connection": "postgres",
+        "test": true,
         "sql": {
-          "query": "call sp_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)\n",
+          "query": "call sp_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)",
           "params": [
             {
               "name": ":P1",
-              "value": "{{$_GET.id_contrat}}",
-              "test": "311289"
+              "value": "{{$_GET.argno_contrat}}",
+              "test": "311449"
             },
             {
               "name": ":P2",
               "value": "{{$_GET.argmt_cash}}",
-              "test": "38150"
+              "test": "1870"
             },
             {
               "name": ":P3",
@@ -94,12 +95,12 @@
             {
               "name": ":P4",
               "value": "{{$_GET.argno_doc}}",
-              "test": "4525"
+              "test": "6868687"
             },
             {
               "name": ":P5",
               "value": "{{$_GET.argbanque}}",
-              "test": "390"
+              "test": "88391"
             },
             {
               "name": ":P6",
@@ -109,7 +110,7 @@
             {
               "name": ":P7",
               "value": "{{$_GET.argmvtpaye_tx}}",
-              "test": "F§202305006100§14§0¿"
+              "test": ""
             }
           ]
         }
@@ -128,7 +129,8 @@
           "name": "out_id_autremvt2",
           "type": "text"
         }
-      ]
+      ],
+      "outputType": "array"
     }
   }
 }

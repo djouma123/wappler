@@ -37,11 +37,21 @@
     {
       "path": "/Visualisation/Recherche",
       "page": "Visualisation/Recherche",
-      "layout": "NormalPage"
+      "layout": "LoginLayout"
     },
     {
       "path": "/file:///C:/Users/47433/Desktop/testWappApi/public/reports/index",
       "page": "file:///C:/Users/47433/Desktop/testWappApi/public/reports/index"
+    },
+    {
+      "path": "/Report/RecuReport",
+      "page": "Report/RecuReport",
+      "layout": "NormalPage"
+    },
+    {
+      "path": "/Report/tst",
+      "page": "Report/tst",
+      "layout": "LoginLayout"
     }
   ]
 }

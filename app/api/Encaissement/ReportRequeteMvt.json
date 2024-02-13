@@ -68,17 +68,6 @@
         "output": true
       },
       {
-        "name": "countRow",
-        "module": "core",
-        "action": "setvalue",
-        "options": {
-          "key": "countRow",
-          "value": 0
-        },
-        "meta": [],
-        "outputType": "number"
-      },
-      {
         "name": "LigneMvt",
         "module": "dbupdater",
         "action": "custom",
@@ -90,14 +79,12 @@
               {
                 "name": ":P1",
                 "value": "{{sp_encaiss.custom[0].out_id_autremvt}}",
-                "test": "202401500070",
-                "recid": 1
+                "test": "202401500070"
               },
               {
                 "name": ":P2",
                 "value": "{{sp_encaiss.custom[0].out_nrolettrage}}",
-                "test": "5229797",
-                "recid": 2
+                "test": "5229797"
               }
             ]
           },
@@ -157,42 +144,104 @@
         "outputType": "array"
       },
       {
-        "name": "LIGNE",
-        "module": "core",
-        "action": "exec",
+        "name": "headers",
+        "module": "dbupdater",
+        "action": "custom",
         "options": {
-          "exec": "lignMVTExec"
-        },
-        "output": true
-      },
-      {
-        "name": "",
-        "module": "core",
-        "action": "while",
-        "options": {
-          "while": "{{countRow<=LIGNE.count()}}",
-          "exec": {
-            "steps": {
-              "name": "",
-              "module": "arraylist",
-              "action": "add",
-              "options": {
-                "ref": "list",
-                "value": "{{LIGNE}}"
+          "connection": "postgres",
+          "sql": {
+            "query": "select * from reportrecu (:P1,:P2,'HFHVHVGHVH4547C','DJOUMA',:P3 ,:P4)",
+            "params": [
+              {
+                "name": ":P1",
+                "value": "{{sp_encaiss.custom[0].out_id_autremvt}}",
+                "test": "202401500070"
+              },
+              {
+                "name": ":P2",
+                "value": "{{$_GET.argmt_cash + $_GET.argmt_cheque}}",
+                "test": "985712"
+              },
+              {
+                "name": ":P3",
+                "value": "{{$_GET.argusermaj}}",
+                "test": "47433"
+              },
+              {
+                "name": ":P4",
+                "value": "{{$_GET.id_contrat}}",
+                "test": "307310"
               }
-            }
+            ]
           }
-        }
-      },
-      {
-        "name": "listMVT",
-        "module": "arraylist",
-        "action": "value",
-        "options": {
-          "ref": "list"
         },
         "output": true,
-        "meta": [],
+        "meta": [
+          {
+            "name": "nom",
+            "type": "text"
+          },
+          {
+            "name": "adresse",
+            "type": "text"
+          },
+          {
+            "name": "boite_postal",
+            "type": "text"
+          },
+          {
+            "name": "id_client",
+            "type": "number"
+          },
+          {
+            "name": "id_contrat",
+            "type": "number"
+          },
+          {
+            "name": "id_pl",
+            "type": "number"
+          },
+          {
+            "name": "adr_physique",
+            "type": "text"
+          },
+          {
+            "name": "codepl",
+            "type": "text"
+          },
+          {
+            "name": "code_cpteur1",
+            "type": "number"
+          },
+          {
+            "name": "id_recu",
+            "type": "number"
+          },
+          {
+            "name": "payant",
+            "type": "number"
+          },
+          {
+            "name": "misc",
+            "type": "text"
+          },
+          {
+            "name": "caissier_nom_mat",
+            "type": "text"
+          },
+          {
+            "name": "montant_recu",
+            "type": "number"
+          },
+          {
+            "name": "solde_compte",
+            "type": "number"
+          },
+          {
+            "name": "solde_sens",
+            "type": "text"
+          }
+        ],
         "outputType": "array"
       }
     ]
