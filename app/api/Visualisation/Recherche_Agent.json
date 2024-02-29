@@ -2,24 +2,16 @@
   "meta": {
     "$_GET": [
       {
-        "type": "text",
+        "type": "number",
         "name": "searchtype"
       },
       {
         "type": "number",
-        "name": "typerole"
+        "name": "role_type"
       },
       {
         "type": "text",
-        "name": "searchcreteria"
-      },
-      {
-        "type": "number",
-        "name": "rechcertype"
-      },
-      {
-        "type": "number",
-        "name": "agentsearch"
+        "name": "searchcriteria"
       }
     ]
   },
@@ -31,7 +23,7 @@
       "options": {
         "connection": "postgres",
         "sql": {
-          "query": "select * from fc_RechercheAvancee(:P1,:P2,:P3)",
+          "query": "select * from fc_rechercheavancee_Agents (?,?,?)",
           "params": [
             {
               "name": ":P1",
@@ -40,17 +32,16 @@
             },
             {
               "name": ":P2",
-              "value": "{{$_GET.searchcreteria}}",
+              "value": "{{$_GET.searchcriteria}}",
               "test": "AND CL.NUM_PORTABLE =  77832308"
             },
             {
               "name": ":P3",
-              "value": "{{$_GET.typerole}}",
+              "value": "{{$_GET.role_type}}",
               "test": "0"
             }
           ]
-        },
-        "test": true
+        }
       },
       "output": true,
       "meta": [
@@ -68,11 +59,11 @@
         },
         {
           "name": "date_visite",
-          "type": "text"
+          "type": "datetime"
         },
         {
           "name": "agmobil",
-          "type": "text"
+          "type": "number"
         },
         {
           "name": "adresse",
@@ -133,17 +124,8 @@
         {
           "name": "type_role",
           "type": "number"
-        },
-        {
-          "name": "type_cellule",
-          "type": "text"
-        },
-        {
-          "name": "inst_phys",
-          "type": "text"
         }
-      ],
-      "outputType": "array"
+      ]
     }
   }
 }

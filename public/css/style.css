@@ -9,7 +9,7 @@
 .wappler-temp{}
 .wappler-temp{}
 .style4{font-family:"Times New Roman", Times, serif;font-size:8px}
-.style5{}
+.style5{height:100vh}
 .wappler-temp{}
 .style6{font-size:9px}
 .wappler-temp{}
@@ -19,7 +19,10 @@
 .wappler-temp{}
 .wappler-temp{}
 .wappler-temp{}
-.style7{font-size:9px;margin-top:0px;padding-top:0px;height:770px}
+.style7{font-size:9px;margin-top:0px;margin-bottom:0px;padding-top:0px;height:770px;display:grid}
+.style7:not(:last-child){
+    margin-bottom: 0;
+}
 .style8{font-size:10px;width:250px}
 .wappler-temp{}
 .style9{font-size:9px}
@@ -39,7 +42,7 @@
 .style23{font-size:10px}
 .style24{font-size:10px}
 .style25{font-size:10px}
-.style26{font-size:10px}
+.style26{font-size:10px;width:50px}
 .style27{font-size:10px}
 .style28{font-size:10px}
 .style29{font-size:10px}
@@ -63,4 +66,15 @@
 .wappler-temp{}
 head{}
 head{}
-.style39{font-size:10px}
+.style39{font-size:10px;width:50px}
+.style40{position:sticky;top:0}
+.style41{}
+.style42{height:20px}
+.style43{height:30px}
+.style44{height:30px}
+.style45{}
+.style46{}
+.style47{width:10px;height:10px}
+.style48{font-size:10px;font-weight:bold}
+.style49{font-weight:bold}
+.style50{font-weight:bold}

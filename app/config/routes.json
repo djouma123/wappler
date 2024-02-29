@@ -37,7 +37,7 @@
     {
       "path": "/Visualisation/Recherche",
       "page": "Visualisation/Recherche",
-      "layout": "LoginLayout"
+      "layout": "main"
     },
     {
       "path": "/file:///C:/Users/47433/Desktop/testWappApi/public/reports/index",

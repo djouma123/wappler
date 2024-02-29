@@ -219,6 +219,12 @@ dmx.config({
         "type": "text",
         "name": "argmvtpaye_tx"
       }
+    ],
+    "sessionStorage": [
+      {
+        "type": "number",
+        "name": "IdContrat"
+      }
     ]
   },
   "Recherche": {
@@ -237,6 +243,41 @@ dmx.config({
     "searchCritique": {
       "meta": null,
       "outputType": "object"
+    },
+    "sessionStorage": [
+      {
+        "type": "number",
+        "name": "IdContrat"
+      }
+    ],
+    "data_view1": {
+      "meta": [
+        {
+          "name": "CODE_TABLE",
+          "type": "text"
+        },
+        {
+          "name": "ID_LIGNE",
+          "type": "number"
+        },
+        {
+          "name": "LIB_COURT",
+          "type": "text"
+        },
+        {
+          "name": "LIB_LONG",
+          "type": "text"
+        },
+        {
+          "name": "NOM_TABLE",
+          "type": "text"
+        },
+        {
+          "name": "CODE_LIGNE",
+          "type": "number"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });
