@@ -96,7 +96,7 @@
                                 <div class="form-group mb-3 row" is="dmx-input-group">
                                     <label for="input7" class="col-sm-3 col-form-label offset-0 ps-0 pe-0">Type Role</label>
                                     <div class="col-sm-9 style12">
-                                        <select id="type_role" class="form-select style13" dmx-on:changed="searchCritique.setValue(searchCritique.value+' RL.TYPE_ROLE =  &quot;%'+selectedValue+'%&quot;')" dmx-bind:options="json_tablevaleurs.data.NewDataSet.tv.where(`CODE_TABLE`, 'TPRL', '==')" optiontext="LIB_COURT" optionvalue="ID_LIGNE">
+                                        <select id="type_role" class="form-select style13" dmx-bind:options="json_tablevaleurs.data.NewDataSet.tv.where(`CODE_TABLE`, 'TPRL', '==')" optiontext="LIB_COURT" optionvalue="ID_LIGNE">
                                             <option value="0">Aucun</option>
                                         </select>
                                     </div>
@@ -190,7 +190,7 @@
 
                                     <div is="dmx-radio-group" id="group2" class="radio-group col-8">
 
-                                        <input id="radio1" type="radio" name="select_" checked autocomplete="off" dmx-on:click="run([{run:{outputType:'text',action:`vartypesearch.setValue(0)`}},{runJS:{outputType:'text',function:'myfunction'}}])">
+                                        <input id="radio1" type="radio" name="select_" autocomplete="off" checked dmx-on:click="run([{run:{outputType:'text',action:`vartypesearch.setValue(0)`}},{runJS:{outputType:'text',function:'myfunction'}}])">
                                         <label class="style50 ">Simple</label>
                                         <input id="radio2" type="radio" name="select_" dmx-on:click="run([{run:{outputType:'text',action:`vartypesearch.setValue(1)`}},{runJS:{outputType:'text',function:'myfunction'}}])">
                                         <label class="style49">Complexe</label>
@@ -206,10 +206,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <button id="btn1" class="btn w-100 btn-outline-secondary mb-1 style30" dmx-on:click="run([{runJS:{outputType:'text',function:'rechrcheavance_txt'}},{condition:{outputType:'boolean',if:`content.searchCritique.value!=\'\'`,then:{steps:{run:{outputType:'text',action:`servCntVisuCompteContrat.load({searchtype: 2, typerole: 0, searchcreteria: content.searchCritique.value})`}}},else:{steps:{run:{outputType:'text',action:`modal2.show()`}}}}}])" dmx-on:dblclick="">Effacer</button>
+                                    <button id="btn1" class="btn w-100 btn-outline-secondary mb-1 style30" dmx-on:click="run([{runJS:{outputType:'text',function:'rechrcheavance_txt'}},{condition:{outputType:'boolean',if:`content.searchCritique.value!=\'\'`,then:{steps:{run:{outputType:'text',action:`servCntVisuCompteContrat.load({searchtype: 2, typerole: 0, searchcreteria: content.searchCritique.value})`}}},else:{steps:{run:{outputType:'text',action:`modal2.show()`}}}}}])">Effacer</button>
                                 </div>
                                 <div class="col-6 style31">
-                                    <button id="btn3" class="btn w-100 btn-outline-secondary style32" dmx-on:click="run([{runJS:{outputType:'text',function:'rechrcheavance_txt'}},{condition:{outputType:'boolean',if:`content.searchCritique.value!=\'\'`,then:{steps:{condition:{outputType:'boolean',if:`radio1.value==1`,then:{steps:{condition:{outputType:'boolean',if:`input18.checked`,then:{steps:{run:{outputType:'text',action:`rechercheAgents.load({searchtype: 2, role_type: form1.type_role.value, searchcriteria: searchCritique.value.replace(\'&quot;\', \'\\\'\').uppercase()})`}}},else:{steps:{run:{outputType:'text',action:`servCntVisuCompteContrat.load({searchtype: 2, typerole: form1.type_role.value, searchcreteria: searchCritique.value.replace(\'&quot;\', \'\\\'\').uppercase()})`}}}}}}}}},else:{steps:{run:{outputType:'text',action:`modal1.show()`}}}}}])">Rechercher</button>
+                                    <button id="btn3" class="btn w-100 btn-outline-secondary style32" dmx-on:click="run([{runJS:{outputType:'text',function:'rechrcheavance_txt'}},{condition:{outputType:'boolean',if:`content.searchCritique.value!=\'\'`,then:{steps:{condition:{outputType:'boolean',if:`vartypesearch.value==0`,then:{steps:{condition:{outputType:'boolean',if:`input18.checked`,then:{steps:{run:{outputType:'text',action:`servCntVisuCompteContrat.load({searchtype: 2, typerole: form1.type_role.value, searchcreteria: searchCritique.value.replace(\'&quot;\', \'\\\'\').uppercase(), agentsearch: 1})`}}},else:{steps:{run:{outputType:'text',action:`servCntVisuCompteContrat.load({searchtype: 2, typerole: form1.type_role.value, searchcreteria: searchCritique.value.replace(\'&quot;\', \'\\\'\').uppercase(), agentsearch: 0})`}}}}}}}}},else:{steps:{run:{outputType:'text',action:`modal1.show()`}}}}}])">
+                                        Rechercher<span class="spinner-border spinner-border-sm" role="status" dmx-show="servCntVisuCompteContrat.state.executing"></span></button>
                                 </div>
                                 <div class="col-6 mb-1">
                                     <button id="btn4" class="btn w-100 btn-outline-secondary style33" dmx-on:click="">Selectionner</button>
@@ -405,7 +406,7 @@ function rechrcheavance_txt()
     if (document.getElementById('select_CtTarif').value != 0 )
     {
        dmx.app.data.content.searchCritique.value += ' and  CNT.SOUS_CATEG IN  (SELECT  NUM_SOUS_CAT_TAR   FROM   sous_categ_tarif  WHERE  num_categ =  ' + document.getElementById('select_CtTarif').value 
-      
+      +')'
         console.log( dmx.app.data.content.searchCritique.value);
     }
     if (document.getElementById('select_GpFact').value != 0 )
@@ -421,8 +422,7 @@ function rechrcheavance_txt()
         console.log( dmx.app.data.content.searchCritique.value);
     }
     
-    
-    
+     
 }
  
 

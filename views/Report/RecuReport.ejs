@@ -1,4 +1,6 @@
-<!-- Wappler include head-page="layouts/NormalPage" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="RecuReport" appconnect="local" dmx-on:load="run({runJS:{outputType:'text',function:'load'}})" -->
+<!-- Wappler include head-page="layouts/NormalPage" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="RecuReport" appconnect="local" dmx-on:load="run({runJS:{outputType:'text',function:'load'}})" components="{dmxStateManagement:{},dmxBootstrap5TableGenerator:{},dmxFormatter:{}}" -->
+<dmx-serverconnect id="serverconnect1" url="/api/Encaissement/ReportRequeteMvt" dmx-param:id_contrat="local1.data.id_contrat" dmx-param:argmt_cash="local1.data.argmt_cash" dmx-param:argmt_cheque="local1.data.argmt_cheque" dmx-param:argno_doc="local1.data.argno_doc" dmx-param:argbanque="local1.data.argbanque" dmx-param:argusermaj="local1.data.argusermaj" dmx-param:argmvtpaye_tx="local1.data.argmvtpaye_tx.replace('&quot;', '')"></dmx-serverconnect>
+<dmx-local-manager id="local1"></dmx-local-manager>
 <meta name="ac:route" content="/Report/RecuReport">
 <script src="/bootstrap/5/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/css/style.css" />
@@ -15,12 +17,12 @@
 
         </div>
         <div class="text-center border-1 rounded border-dark border offset-1 col-10">
-            <h6 class="text-center w-auto">Reçu N°&nbsp;</h6>
+            <h6 class="text-center w-auto">Reçu N° {{serverconnect1.data.headers[0].id_recu}}</h6>
         </div>
         <div class="text-center gx-5 col-12">
             <div class="row">
                 <div class="col-4 offset-4 border border-dark border-1 h-25">
-                    <h6>N CONTRAT :&nbsp;</h6>
+                    <h6>N CONTRAT : {{serverconnect1.data.headers[0].id_contrat}}</h6>
                 </div>
                 <div class="col h-25">
                     <h6 class="text-start">DATE : {{var1.datetime.formatDate('dd-MMM-yyyy')}}</h6>
@@ -39,19 +41,19 @@
             <div class="pe-0 col-8">
                 <div class="row">
                     <div class="col-12">
-                        <p>&nbsp; &nbsp; &nbsp;Nom :&nbsp;</p>
-                        <p>Adresse :&nbsp;</p>
+                        <p class="style53">&nbsp; &nbsp; &nbsp;Nom : {{serverconnect1.data.headers[0].nom}}</p>
+                        <p class="style69">Adresse :&nbsp; {{serverconnect1.data.headers[0].adresse}}</p>
 
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-3">
-                                <p>&nbsp; &nbsp;B.P&nbsp; &nbsp; &nbsp;:</p>
-                                <p>&nbsp;N PL&nbsp; &nbsp; &nbsp;:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                                <p class="style58">&nbsp; &nbsp;B.P&nbsp; &nbsp; &nbsp;: {{serverconnect1.data.headers[0].id_pl}}</p>
+                                <p class="style60">&nbsp;N PL&nbsp; &nbsp; &nbsp;: {{serverconnect1.data.headers[0].codepl}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                             </div>
                             <div class="col">
-                                <p>Adresse :&nbsp;</p>
-                                <p>N Compteur :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                                <p class="style59">Adresse : {{serverconnect1.data.headers[0].adr_physique}}</p>
+                                <p class="style61">N Compteur :&nbsp; &nbsp;{{serverconnect1.data.headers[0].code_cpteur1}}&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                             </div>
                         </div>
 
@@ -63,52 +65,41 @@
             </div>
             <div class="col-4 ps-0">
 
-                <p>&nbsp; &nbsp; &nbsp; &nbsp; Date :&nbsp;</p>
-                <p>N Contrat :&nbsp;&nbsp;</p>
-                <p>&nbsp; &nbsp;N Client :&nbsp;</p>
-                <p>Solde Compte :</p>
+                <p class="style54">&nbsp; &nbsp; &nbsp; &nbsp; Date :&nbsp;</p>
+                <p class="style55">N Contrat :&nbsp; {{serverconnect1.data.headers[0].id_contrat}}</p>
+                <p class="style56">&nbsp; &nbsp;N Client : {{serverconnect1.data.headers[0].id_client}}</p>
+                <p class="style57">Solde Compte :{{serverconnect1.data.headers[0].solde_compte}}</p>
             </div>
 
         </div>
         <div class="row">
             <div class="col">
-                <p>Recu le montant de :&nbsp; &nbsp; &nbsp; &nbsp;DJF&nbsp; &nbsp; par notre Caissier :&nbsp;&nbsp;</p>
+                <p class="style62">Recu le montant de :&nbsp; &nbsp; &nbsp; &nbsp;DJF&nbsp; &nbsp; par notre Caissier :&nbsp;&nbsp;</p>
             </div>
         </div>
         <div class="row">
 
             <div class="col-12">
 
-                <div class="table-responsive">
+                <div class="table-responsive style68">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>N Piece</th>
-                                <th>Date</th>
-                                <th>Type Mouvement</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
+                                <th class="style63">N Piece</th>
+                                <th class="style64">Date</th>
+                                <th class="style65">Type Mouvement</th>
+                                <th class="style66">Debit</th>
+                                <th class="style67">Credit</th>
                             </tr>
                         </thead>
-                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat2">
-
-
+                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat1">
                             <tr>
-
                                 <td dmx-text="trid_1"></td>
                                 <td dmx-text="trdate_1.formatDate('dd-MMM-yyyy')"></td>
                                 <td dmx-text="libelle_type_mvt_1"></td>
                                 <td dmx-text="d_1"></td>
                                 <td dmx-text="c_1"></td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>{{sum(d_1)}}</td>
-                                <td>{{sum(c_1)}}</td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -124,12 +115,18 @@
 });*/
  function load() {
     
-    setTimeout(() => {
+    /*setTimeout(() => {
          window.print();
       console.log('cest bon');
-    },100)
+    },100)*/
+
+      window.print();
     
-     
 
  }    
+   
+     /* setTimeout(function(){
+      mywindow.print();
+      // mywindow.close();
+    },1000);*/
 </script>

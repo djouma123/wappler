@@ -20,8 +20,8 @@
       "layout": "main"
     },
     {
-      "path": "/Encaissement/Enc_Divers",
-      "page": "Encaissement/Enc_Divers",
+      "path": "/Encaissement/Enc_Multiple",
+      "page": "Encaissement/Enc_Multiple",
       "layout": "main"
     },
     {
@@ -52,6 +52,11 @@
       "path": "/Report/tst",
       "page": "Report/tst",
       "layout": "LoginLayout"
+    },
+    {
+      "path": "/Encaissement/Encaissement_divers",
+      "page": "Encaissement/Encaissement_divers",
+      "layout": "main"
     }
   ]
 }

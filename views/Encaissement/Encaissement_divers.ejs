@@ -1,0 +1,200 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="Encaissement_divers" appConnect="local" components="{dmxValidator:{},dmxBootstrap5TableGenerator:{}}" -->
+<dmx-serverconnect id="serverEch" url="/api/Encaissement/Nbrechenace"></dmx-serverconnect>
+<dmx-serverconnect id="ListFactureServercnt" url="/api/Encaissement/listFacture"></dmx-serverconnect>
+<dmx-serverconnect id="HeaderServeconnect" url="/api/Encaissement/readheader"></dmx-serverconnect>
+<meta name="ac:route" content="/Encaissement/Encaissement_divers">
+<dmx-serverconnect id="BanqueServerVnt" url="/api/Encaissement/banque"></dmx-serverconnect>
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group mb-3 row">
+                <label for="input1" class="col-sm-2 col-form-label col gx-5 ps-0 pe-0"><b>N Contrat :</b></label>
+                <div class="col-sm-2 ms-0 ps-0 col gx-1">
+                    <input type="text" class="form-control" id="input1" name="input1" aria-describedby="input1_help" placeholder="Enter some text" is="dmx-input" value="" dmx-bind:value="session1.data.IdContrat">
+                </div>
+                <div class="col-5">
+                    <button id="btn_ok" class="btn btn-outline-secondary bg-primary text-white" is="dmx-button" value="" type="button" dmx-on:click=""><b>ok</b>&nbsp;</button>
+                    <button id="btn_" class="btn btn-outline-secondary me-3" is="dmx-button" value="" type="button" dmx-on:click=""><b>...</b></button><a is="dmx-link" id="plusDeatil" href="/Visualisation/Recherche" internal="true">
+                        plus detailles ...
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row row-cols-3">
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item"><b>Nom Payeur : </b></li>
+                <li class="list-group-item"><b>Adesse : </b></li>
+                <li class="list-group-item"><b>Solde compte : </b></li>
+            </ul>
+        </div>
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item"><b>N PL : </b></li>
+                <li class="list-group-item"><b>N Compteur :</b></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row row-cols-5">
+        <div class="mt-2 col-2">
+            <div class="form-group mb-3">
+                <label for="montantLiquide" class="form-label"><b>Montant liquide</b></label>
+                <input type="number" class="form-control" id="montantLiquide" name="input3" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
+            </div>
+        </div>
+        <div class="mt-2 col-2">
+            <div class="form-group mb-3">
+                <label for="input2" class="form-label"><b>Date&nbsp;</b></label>
+                <input type="text" class="form-control" id="input2" name="input2" aria-describedby="input2_help" placeholder="Enter some text" readonly="true" is="dmx-input" value="17-01-2024">
+            </div>
+        </div>
+
+        <div class="mt-2 col-2">
+            <div class="form-group mb-3">
+                <label for="input5" class="form-label"><b>Mode Paiement</b></label>
+                <select id="Mode_Paiment" class="form-select" is="dmx-select">
+                    <option value="1">VIREMENT INDIRECT</option>
+                    <option value="2">AFFECTn ou COMPn EXT</option>
+                    <option value="3">VIREMENT DIRECT</option>
+                    <option value="4">VIEMENT FINANCE</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-2 col-2">
+            <div class="form-group mb-3">
+                <label for="NroDoc" class="form-label"><b>N Document</b></label>
+                <input type="number" class="form-control" id="NroDoc" name="input6" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="">
+            </div>
+        </div>
+        <div class="mt-2 col-2">
+            <div class="form-group mb-3">
+                <label for="input5" class="form-label"><b>Banque</b></label>
+                <select id="banque" class="form-select" is="dmx-select" dmx-bind:options="BanqueServerVnt.data.api.data.BanqueList" optiontext="lib_long" optionvalue="id_ligne">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="h-25 col-8">
+        <div class="form-group mb-3 row">
+            <label for="input5" class="col-sm-2 col-form-label"><b>Nombre d'echeance :</b></label>
+            <div class="col-sm-1">
+
+                <select id="select2" class="form-select" is="dmx-select" dmx-bind:options="serverEcheance.data.listecheance" optionvalue="$value">
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row mh-100 row-cols-10 style79 border-top border-warning rounded-2 border-2 mt-1" style="">
+        <div class="col" style="overflow: auto;">
+            <div class="row">
+                <small class="text-muted mark">Mouvement Non Affectees</small>
+            </div>
+
+            <section style="">
+                <div class="table-responsive" style="overflow: scroll;">
+                    <table class="table" style="overflow: scroll; max-width: 200vh;">
+                        <thead>
+                            <tr>
+                                <th>N Piece</th>
+                                <th>DATE</th>
+                                <th>Type Mouvement</th>
+                                <th class="sorting  d-none">Num contrat</th>
+                                <th class="sorting  d-none"> Nro lettrage</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                                <th class="sorting  d-none">Ltype</th>
+                                <th class="sorting  d-none">Type mvt</th>
+                                <th class="sorting  d-none">Ligneno</th>
+                                <th class="sorting  d-none">Echu</th>
+                                <th class="sorting  d-none">Echeance</th>
+                                <th class="sorting  d-none">Echu filter</th>
+                                <th class="sorting  d-none">Date lettrage</th>
+                                <th class="sorting  d-none">Montant tva</th>
+                            </tr>
+                        </thead>
+                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="ListFactureServercnt.data.api.data.queryListFactures" id="tableRepeat1">
+                            <tr>
+                                <td dmx-text="trid"></td>
+                                <td dmx-text="trdate"></td>
+                                <td dmx-text="libelle_type_mvt"></td>
+                                <td dmx-text="num_contrat" class="sorting  d-none"></td>
+                                <td dmx-text="nro_lettrage" class="sorting  d-none"></td>
+                                <td dmx-text="debit"></td>
+                                <td dmx-text="credit"></td>
+                                <td dmx-text="ltype" class="sorting  d-none"></td>
+                                <td dmx-text="type_mvt" class="sorting  d-none"></td>
+                                <td dmx-text="ligneno" class="sorting  d-none"></td>
+                                <td dmx-text="echu" class="sorting  d-none"></td>
+                                <td dmx-text="echeance" class="sorting  d-none"></td>
+                                <td dmx-text="echu_filter" class="sorting  d-none"></td>
+                                <td dmx-text="date_lettrage" class="sorting  d-none"></td>
+                                <td dmx-text="montant_tva" class="sorting  d-none"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="table" id="table2" dmx-show="!serverListesFactures.data.api.data.queryListFactures.hasItems()">
+                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverListesFactures.data.api.data.queryListFactures" id="tableRepeat3" dmx-state="query1" dmx-sort="sort" dmx-order="dir">
+                        <tr>
+                            <td colspan="">pas de donnees</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <footer class="container-fluid fixed-bottom">
+        <div class="row mt-3">
+
+            <div class="col-4">
+                <div class="d-flex">
+                    <h5 id="MontanNonAffecte" class="text-body">Total Non Affecte&nbsp; &nbsp;:&nbsp; <span style="font-size: 17.5px;">{{(serverListesFactures.data.api.data.queryListFactures.sum(`debit`) - serverListesFactures.data.api.data.queryListFactures.sum(`credit`)).formatCurrency(' ', ' ', ' ', 0)}}</span></h5>
+                </div>
+                <div class="d-flex">
+                    <h5 id="MontanAffecte">Montant Affectees :&nbsp;&nbsp; <a id="MontantAffecteValue" is="dmx-link" href="#">0</a></h5>
+                </div>
+
+            </div>
+            <div class="offset-1 col-4">
+                <div class="d-flex">
+                    <h5 id="difference" class="text-danger">
+                        Diferrence :&nbsp; &nbsp; <small id="DiferrenceValue" class="text-danger"></small></h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-4 mb-5 pt-2 pb-0">
+            <div class="col-12">
+                <div class="d-flex">
+                    <div class="form-group w-100 mb-3 ps-0 pe-0">
+                        <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.toggle();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber());local1.set('argmt_cash',montantLiquide.value);local1.set('argbanque',banque.value);local1.set('id_contrat',input1.value);local1.set('argmt_cheque',MontantCheque.value);local1.set('argmvtpaye_tx',VarListFactures.value);local1.set('argusermaj',47433);local1.set('argno_doc',NroDoc.value)">Mise A jour</button>
+                        <div class="form-check form-check-inline style74">
+                            <input class="form-check-input ms-5" type="checkbox" id="input5" checked name="input5" is="dmx-checkbox" value="">
+                            <label class="form-check-label" for="input5">Imprimer Recu</label>
+                        </div>
+                        <div class="form-check form-check-inline style75">
+                            <input class="form-check-input ms-5" type="checkbox" id="affecterMvtCheck" checked name="input5" is="dmx-checkbox" value="">
+                            <label class="form-check-label" for="input5">Affecter Mouvement</label>
+                        </div>
+                        <button id="btn3" class="btn ms-5 me-5 w-25 lh-lg text-uppercase fw-bold bg-danger text-light btn-sm style81" is="dmx-button" value="" type="button">Fermer</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+</div>

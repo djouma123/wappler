@@ -11,10 +11,6 @@
     "layoutPage": "main",
     "description": ""
   },
-  "Enc_Divers.ejs": {
-    "layoutPage": "main",
-    "description": ""
-  },
   "encaissement_Diver_Multiple.ejs": {
     "layoutPage": "main",
     "description": ""
@@ -32,6 +28,14 @@
     "description": ""
   },
   "EncaissementFature.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "Enc_Multiple.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "Encaissement_divers.ejs": {
     "layoutPage": "main",
     "description": ""
   }

@@ -36,7 +36,7 @@
             </div>
             <div class="modal-footer">
                 <button id="btn1" class="btn" dmx-on:click="browser1.goto('/Report/RecuReport',true)">Button</button>
-                <button type="button" class="btn btn-primary w-100" dmx-on:click="run({condition:{outputType:'boolean',if:`input5.checked`,then:{steps:[{run:{outputType:'text',action:`modal1.toggle()`}},{runJS:{outputType:'text',function:'loadOtherPage'}}]},else:{steps:[{run:{outputType:'text',action:`serverSPencaissement.load({id_contrat: input1.value, argmt_cash: montantLiquide.value, argmt_cheque: MontantCheque.value, argno_doc: NroDoc.value, argbanque: banque.value, argusermaj: 47433, argmvtpaye_tx: VarListFactures.value.replace(\'&quot;\', \'\')});modal1.form1.reset()`}},{runJS:{outputType:'text',function:'load'}},{run:{outputType:'text',action:`modal1.toggle()`}}]}}})" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
+                <button type="button" class="btn btn-primary w-100" dmx-on:click="run({condition:{outputType:'boolean',if:`input5.checked`,then:{steps:[{run:{outputType:'text',action:`modal1.toggle()`}},{runJS:{outputType:'text',function:'loadOtherPage'}},{run:{outputType:'text',action:`browser1.goto(\'/Report/RecuReport\')`}}]},else:{steps:[{run:{outputType:'text',action:`serverSPencaissement.load({id_contrat: input1.value, argmt_cash: montantLiquide.value, argmt_cheque: MontantCheque.value, argno_doc: NroDoc.value, argbanque: banque.value, argusermaj: 47433, argmvtpaye_tx: VarListFactures.value.replace(\'&quot;\', \'\')});modal1.form1.reset()`}},{runJS:{outputType:'text',function:'load'}},{run:{outputType:'text',action:`modal1.toggle()`}}]}}})" dmx-bind:disabled="form1.input3.value+' '-form1.total.value+' '&lt;0">Save changes
                 </button>
             </div>
         </div>
@@ -48,196 +48,214 @@
 <dmx-serverconnect id="serverEcheance" url="/api/Encaissement/Nbrechenace" dmx-param:new="input1.value"></dmx-serverconnect>
 <meta name="ac:route" content="/Encaissement/EncaissementFature">
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-8">
-            <div class="form-group mb-3 row">
-                <label for="input1" class="col-sm-2 col-form-label col gx-5 ps-0 pe-0"><b>N Contrat :</b></label>
-                <div class="col-sm-2 ms-0 ps-0 col gx-1">
-                    <input type="text" class="form-control" id="input1" name="input1" aria-describedby="input1_help" placeholder="Enter some text" is="dmx-input" value="" dmx-bind:value="session1.data.IdContrat">
-                </div>
-                <div class="col-5">
-                    <button id="btn_ok" class="btn btn-outline-secondary bg-primary text-white" is="dmx-button" value="" type="button" dmx-on:click="serverLHeadReader.reset();serverListesFactures.reset();serverLHeadReader.load({id_contrat: input1.value});serverListesFactures.load({id_contrat: input1.value});serverEcheance.load({new: input1.value})"><b>ok</b>&nbsp;</button>
-                    <button id="btn_" class="btn btn-outline-secondary me-3" is="dmx-button" value="" type="button" dmx-on:click="modal2.show()"><b>...</b></button><a is="dmx-link" id="plusDeatil" href="/Visualisation/Recherche" internal="true">
-                        plus detailles ...
-                    </a>
-                </div>
-            </div>
 
-        </div>
-        <div class="col-1"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-
-    </div>
-    <div class="row row-cols-3">
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><b>Nom Payeur : {{serverLHeadReader.data.api.data.headerQuery[0].nom}}</b></li>
-                <li class="list-group-item"><b>Adesse : {{serverLHeadReader.data.api.data.headerQuery[0].adresse}}</b></li>
-                <li class="list-group-item"><b>Solde compte : </b>&nbsp; &nbsp;{{serverLHeadReader.data.api.data.headerQuery[0].solde_compte}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<b>Debit&nbsp;</b></li>
-            </ul>
-        </div>
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item"><b>N PL : {{serverLHeadReader.data.api.data.headerQuery[0].id_pl}}</b></li>
-                <li class="list-group-item"><b>N Compteur : {{serverLHeadReader.data.api.data.headerQuery[0].code_cpteur}}</b></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="row row-cols-5">
-        <div class="mt-2 col-2">
-            <div class="form-group mb-3">
-                <label for="input2" class="form-label"><b>Date&nbsp;</b></label>
-                <input type="text" class="form-control" id="input2" name="input2" aria-describedby="input2_help" placeholder="Enter some text" readonly="true" is="dmx-input" value="17-01-2024">
-            </div>
-        </div>
-        <div class="mt-2 col-2">
-            <div class="form-group mb-3">
-                <label for="montantLiquide" class="form-label"><b>Montant liquide</b></label>
-                <input type="number" class="form-control" id="montantLiquide" name="input3" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
-            </div>
-        </div>
-        <div class="mt-2 col-2">
-            <div class="form-group mb-3">
-                <label for="MontantCheque" class="form-label"><b>Montant Cheque</b></label>
-                <input type="number" class="form-control" id="MontantCheque" name="input4" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
-            </div>
-        </div>
-        <div class="mt-2 col-2">
-            <div class="form-group mb-3">
-                <label for="input5" class="form-label"><b>Banque</b></label>
-                <select id="banque" class="form-select" is="dmx-select" dmx-bind:options="serverBanques.data.api.data.BanqueList" optiontext="lib_long" optionvalue="id_ligne" dmx-on:updated="" dmx-on:keydown="" dmx-on:pointerover="">
-                </select>
-            </div>
-        </div>
-        <div class="mt-2 col-2">
-            <div class="form-group mb-3">
-                <label for="NroDoc" class="form-label"><b>N Document</b></label>
-                <input type="number" class="form-control" id="NroDoc" name="input6" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-
-        <div class="h-25 col-8">
-            <div class="form-group mb-3 row">
-                <label for="input5" class="col-sm-2 col-form-label"><b>Nombre d'echeance :</b></label>
-                <div class="col-sm-1">
-
-                    <select id="select2" class="form-select" is="dmx-select" dmx-bind:options="serverEcheance.data.listecheance" optionvalue="$value">
-                    </select>
-                </div>
-                <div class="h-25 ms-5 ps-5 col-8">
-                    <h4 id="TotalMontant" class="text-white bg-primary"> </h4>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row border border-dark mh-100 row-cols-10" style="">
-        <div class="col" style="overflow: scroll;">
+    <div class="row border border-dark rounded-1 mb-3 bg-light">
+        <div class="bg-white w-auto mt-2 mb-2 ms-3 me-3 col-12">
             <div class="row">
-                <small class="text-muted mark">With faded secondary text</small>
-            </div>
+                <div class="col-8">
+                    <div class="form-group mb-3 row">
+                        <label for="input1" class="col-sm-2 col-form-label col gx-5 ps-0 pe-0"><b>N Contrat :</b></label>
+                        <div class="col-sm-2 ms-0 ps-0 col gx-1">
+                            <input type="text" class="form-control" id="input1" name="input1" aria-describedby="input1_help" placeholder="Enter some text" is="dmx-input" value="" dmx-bind:value="session1.data.IdContrat">
+                        </div>
+                        <div class="col-5">
+                            <button id="btn_ok" class="btn btn-outline-secondary bg-primary text-white" is="dmx-button" value="" type="button" dmx-on:click="serverLHeadReader.reset();serverListesFactures.reset();serverLHeadReader.load({id_contrat: input1.value});serverListesFactures.load({id_contrat: input1.value});serverEcheance.load({new: input1.value})"><b>ok</b>&nbsp;</button>
+                            <button id="btn_" class="btn btn-outline-secondary me-3" is="dmx-button" value="" type="button" dmx-on:click="modal2.show()"><b>...</b></button><a is="dmx-link" id="plusDeatil" href="/Visualisation/Recherche" internal="true">
+                                plus detailles ...
+                            </a>
+                        </div>
+                    </div>
 
-            <section style="">
-                <div class="table-responsive" style="overflow: auto;">
-                    <table class="table" id="tableMvt">
-                        <thead>
-                            <tr>
-                                <th class="sorting" dmx-on:click="query1.set('sort','null');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='null' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='null' && query1.data.dir == 'desc'"></th>
-                                <th class="sorting" dmx-on:click="query1.set('sort','trid');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='trid' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='trid' && query1.data.dir == 'desc'">N°Piece</th>
-                                <th class="sorting" dmx-on:click="query1.set('sort','trdate');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='trdate' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='trdate' && query1.data.dir == 'desc'">Date</th>
-                                <th class="sorting" dmx-on:click="query1.set('sort','libelle_type_mvt');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='libelle_type_mvt' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='libelle_type_mvt' && query1.data.dir == 'desc'">Type Mouvement</th>
-                                <th class="sorting" dmx-on:click="query1.set('sort','debit');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='debit' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='debit' && query1.data.dir == 'desc'">Debit</th>
-                                <th class="sorting" dmx-on:click="query1.set('sort','credit');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='credit' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='credit' && query1.data.dir == 'desc'">Credit</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','ltype');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='ltype' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='ltype' && query1.data.dir == 'desc'">Ltype</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','type_mvt');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='type_mvt' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='type_mvt' && query1.data.dir == 'desc'">Type mvt</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','ligneno');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='ligneno' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='ligneno' && query1.data.dir == 'desc'">Ligneno</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','montant_tva');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='montant_tva' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='montant_tva' && query1.data.dir == 'desc'">Montant tva</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','num_contrat');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='num_contrat' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='num_contrat' && query1.data.dir == 'desc'">Num contrat</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','nro_lettrage');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='nro_lettrage' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='nro_lettrage' && query1.data.dir == 'desc'"> Nro lettrage</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','echu');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echu' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echu' && query1.data.dir == 'desc'">Echu</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','echeance');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echeance' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echeance' && query1.data.dir == 'desc'">Echeance</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','echu_filter');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echu_filter' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echu_filter' && query1.data.dir == 'desc'">Echu filter</th>
-                                <th class="sorting  d-none" dmx-on:click="query1.set('sort','date_lettrage');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='date_lettrage' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='date_lettrage' && query1.data.dir == 'desc'">Date lettrage</th>
-                            </tr>
-                        </thead>
-                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverListesFactures.data.api.data.queryListFactures" id="tableRepeat2" dmx-state="query1" dmx-sort="sort" dmx-order="dir">
-                            <tr>
-                                <td>
-                                    <div is="dmx-checkbox-group" id="group1" class="checkbox-group" dmxorgdomid="d138439">
-                                        <input id="checkbox1" type="checkbox" class="select-checkbox" is="dmx-checkbox" value="" name="" dmx-on:click="run({runJS:{function:'getSelectedData',outputType:'text'}})" dmxorgdomid="d138440">
-                                    </div>
-                                </td>
-                                <td dmx-text="trid"></td>
-                                <td dmx-text="trdate"></td>
-                                <td dmx-text="libelle_type_mvt"></td>
-                                <td dmx-text="debit"></td>
-                                <td dmx-text="credit"></td>
-                                <td dmx-text="ltype" class="d-none"></td>
-                                <td dmx-text="type_mvt" class="d-none"></td>
-                                <td dmx-text="ligneno" class="d-none"></td>
-                                <td dmx-text="montant_tva" class="d-none"></td>
-                                <td dmx-text="num_contrat" class="d-none"></td>
-                                <td dmx-text="nro_lettrage" class="d-none"></td>
-                                <td dmx-text="echu" class="d-none"></td>
-                                <td dmx-text="echeance" class="d-none"></td>
-                                <td dmx-text="echu_filter" class="d-none"></td>
-                                <td dmx-text="date_lettrage" class="d-none"></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
-                <table class="table" id="table2" dmx-show="!serverListesFactures.data.api.data.queryListFactures.hasItems()">
-                    <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverListesFactures.data.api.data.queryListFactures" id="tableRepeat3" dmx-state="query1" dmx-sort="sort" dmx-order="dir">
-                        <tr>
-                            <td colspan="">pas de donnees</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </div>
-    <div class="row mt-3">
+                <div class="col-1"></div>
+                <div class="col"></div>
+                <div class="col"></div>
 
-
-
-        <div class="col-4">
-            <div class="d-flex">
-                <h5 id="MontanNonAffecte" class="text-body">Total Non Affecte&nbsp; &nbsp;:&nbsp; <span style="font-size: 17.5px;">{{(serverListesFactures.data.api.data.queryListFactures.sum(`debit`) - serverListesFactures.data.api.data.queryListFactures.sum(`credit`)).formatCurrency(' ', ' ', ' ', 0)}}</span></h5>
             </div>
-            <div class="d-flex">
-                <h5 id="MontanAffecte">Montant Affectees :&nbsp;&nbsp; <a id="MontantAffecteValue" is="dmx-link" href="#">0</a></h5>
+            <div class="row row-cols-3">
+                <div class="col">
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Nom Payeur : {{serverLHeadReader.data.api.data.headerQuery[0].nom}}</b></li>
+                        <li class="list-group-item"><b>Adesse : {{serverLHeadReader.data.api.data.headerQuery[0].adresse}}</b></li>
+                        <li class="list-group-item"><b>Solde compte : </b>&nbsp; &nbsp;{{serverLHeadReader.data.api.data.headerQuery[0].solde_compte}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<b>Debit&nbsp;</b></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>N PL : {{serverLHeadReader.data.api.data.headerQuery[0].id_pl}}</b></li>
+                        <li class="list-group-item"><b>N Compteur : {{serverLHeadReader.data.api.data.headerQuery[0].code_cpteur}}</b></li>
+                    </ul>
+                </div>
             </div>
-
-
-        </div>
-
-        <div class="offset-1 col-4">
-            <div class="d-flex">
-                <h5 id="difference" class="text-danger">
-                    Diferrence :&nbsp; &nbsp; <small id="DiferrenceValue" class="text-danger"></small></h5>
+            <div class="row row-cols-5">
+                <div class="mt-2 col-2">
+                    <div class="form-group mb-3">
+                        <label for="input2" class="form-label"><b>Date&nbsp;</b></label>
+                        <input type="text" class="form-control" id="input2" name="input2" aria-describedby="input2_help" placeholder="Enter some text" readonly="true" is="dmx-input" value="17-01-2024">
+                    </div>
+                </div>
+                <div class="mt-2 col-2">
+                    <div class="form-group mb-3">
+                        <label for="montantLiquide" class="form-label"><b>Montant liquide</b></label>
+                        <input type="number" class="form-control" id="montantLiquide" name="input3" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
+                    </div>
+                </div>
+                <div class="mt-2 col-2">
+                    <div class="form-group mb-3">
+                        <label for="MontantCheque" class="form-label"><b>Montant Cheque</b></label>
+                        <input type="number" class="form-control" id="MontantCheque" name="input4" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="0">
+                    </div>
+                </div>
+                <div class="mt-2 col-2">
+                    <div class="form-group mb-3">
+                        <label for="input5" class="form-label"><b>Banque</b></label>
+                        <select id="banque" class="form-select" is="dmx-select" dmx-bind:options="serverBanques.data.api.data.BanqueList" optiontext="lib_long" optionvalue="id_ligne" dmx-on:updated="" dmx-on:keydown="" dmx-on:pointerover="">
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-2 col-2">
+                    <div class="form-group mb-3">
+                        <label for="NroDoc" class="form-label"><b>N Document</b></label>
+                        <input type="number" class="form-control" id="NroDoc" name="input6" aria-describedby="input2_help" placeholder="Enter some text" is="dmx-input" value="">
+                    </div>
+                </div>
             </div>
+            <div class="row">
 
+                <div class="h-25 col-8">
+                    <div class="form-group mb-3 row">
+                        <label for="input5" class="col-sm-2 col-form-label"><b>Nombre d'echeance :</b></label>
+                        <div class="col-sm-1">
+
+                            <select id="select2" class="form-select" is="dmx-select" dmx-bind:options="serverEcheance.data.listecheance" optionvalue="$value">
+                            </select>
+                        </div>
+                        <div class="h-25 ms-5 ps-5 col-8">
+                            <h4 id="TotalMontant" class="text-white bg-primary"> </h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-    <div class="row mt-4 mb-5 pt-2 pb-0">
         <div class="col-12">
-            <div class="d-flex">
-                <div class="form-group mb-3 w-100">
-                    <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.toggle();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber());local1.set('argmt_cash',montantLiquide.value);local1.set('argbanque',banque.value);local1.set('id_contrat',input1.value);local1.set('argmt_cheque',MontantCheque.value);local1.set('argmvtpaye_tx',VarListFactures.value);local1.set('argusermaj',47433);local1.set('argno_doc',NroDoc.value)">Mise A jour</button>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input ms-5" type="checkbox" id="input5" name="input5" is="dmx-checkbox" value="">
-                        <label class="form-check-label" for="input5">Imprimer Recu</label>
-                    </div><button id="btn3" class="btn ms-5 me-5 w-25 lh-lg text-uppercase fw-bold bg-danger text-light btn-sm" is="dmx-button" value="" type="button">Fermer</button>
+            <div class="row mh-100 row-cols-10 bg-light style80" style="">
+                <div class="col border-top rounded-2 border-warning border-3">
+                    <div class="row mt-1">
+                        <small class="text-muted mark">Mouvement Non Affectees</small>
+                    </div>
 
+                    <section style="" class="style78" style="max-height: 200vhvh;  overflow: auto;">
+                        <div class="table-responsive">
+                            <table class="table" id="tableMvt" style="overflow: scroll; height: 100vh;">
+                                <thead>
+                                    <tr>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','null');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='null' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='null' && query1.data.dir == 'desc'"></th>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','trid');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='trid' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='trid' && query1.data.dir == 'desc'">N°Piece</th>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','trdate');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='trdate' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='trdate' && query1.data.dir == 'desc'">Date</th>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','libelle_type_mvt');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='libelle_type_mvt' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='libelle_type_mvt' && query1.data.dir == 'desc'">Type Mouvement</th>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','debit');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='debit' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='debit' && query1.data.dir == 'desc'">Debit</th>
+                                        <th class="sorting" dmx-on:click="query1.set('sort','credit');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='credit' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='credit' && query1.data.dir == 'desc'">Credit</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','ltype');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='ltype' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='ltype' && query1.data.dir == 'desc'">Ltype</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','type_mvt');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='type_mvt' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='type_mvt' && query1.data.dir == 'desc'">Type mvt</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','ligneno');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='ligneno' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='ligneno' && query1.data.dir == 'desc'">Ligneno</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','montant_tva');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='montant_tva' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='montant_tva' && query1.data.dir == 'desc'">Montant tva</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','num_contrat');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='num_contrat' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='num_contrat' && query1.data.dir == 'desc'">Num contrat</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','nro_lettrage');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='nro_lettrage' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='nro_lettrage' && query1.data.dir == 'desc'"> Nro lettrage</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','echu');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echu' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echu' && query1.data.dir == 'desc'">Echu</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','echeance');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echeance' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echeance' && query1.data.dir == 'desc'">Echeance</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','echu_filter');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='echu_filter' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='echu_filter' && query1.data.dir == 'desc'">Echu filter</th>
+                                        <th class="sorting  d-none" dmx-on:click="query1.set('sort','date_lettrage');query1.set('dir',query1.data.dir == 'desc' ? 'asc' : 'desc')" dmx-class:sorting_asc="query1.data.sort=='date_lettrage' && query1.data.dir == 'asc'" dmx-class:sorting_desc="query1.data.sort=='date_lettrage' && query1.data.dir == 'desc'">Date lettrage</th>
+                                    </tr>
+                                </thead>
+                                <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverListesFactures.data.api.data.queryListFactures" id="tableRepeat2" dmx-state="query1" dmx-sort="sort" dmx-order="dir">
+                                    <tr>
+                                        <td>
+                                            <div is="dmx-checkbox-group" id="group1" class="checkbox-group" dmxorgdomid="d138439">
+                                                <input id="checkbox1" type="checkbox" class="select-checkbox" is="dmx-checkbox" value="" name="" dmx-on:click="run({runJS:{function:'getSelectedData',outputType:'text'}})" dmxorgdomid="d138440">
+                                            </div>
+                                        </td>
+                                        <td dmx-text="trid"></td>
+                                        <td dmx-text="trdate"></td>
+                                        <td dmx-text="libelle_type_mvt"></td>
+                                        <td dmx-text="debit"></td>
+                                        <td dmx-text="credit"></td>
+                                        <td dmx-text="ltype" class="d-none"></td>
+                                        <td dmx-text="type_mvt" class="d-none"></td>
+                                        <td dmx-text="ligneno" class="d-none"></td>
+                                        <td dmx-text="montant_tva" class="d-none"></td>
+                                        <td dmx-text="num_contrat" class="d-none"></td>
+                                        <td dmx-text="nro_lettrage" class="d-none"></td>
+                                        <td dmx-text="echu" class="d-none"></td>
+                                        <td dmx-text="echeance" class="d-none"></td>
+                                        <td dmx-text="echu_filter" class="d-none"></td>
+                                        <td dmx-text="date_lettrage" class="d-none"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <table class="table" id="table2" dmx-show="!serverListesFactures.data.api.data.queryListFactures.hasItems()">
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverListesFactures.data.api.data.queryListFactures" id="tableRepeat3" dmx-state="query1" dmx-sort="sort" dmx-order="dir">
+                                <tr>
+                                    <td>Cell</td>
+                                    <td colspan="">pas de donnees</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </div>
-
         </div>
+
+        <div class="col-12"></div>
     </div>
+
+
+
+
+
+
+
+    <footer class="fixed-bottom container-fluid">
+        <div class="row mt-3">
+
+
+
+            <div class="col-4">
+                <div class="d-flex">
+                    <h5 id="MontanNonAffecte" class="text-body">Total Non Affecte&nbsp; &nbsp;:&nbsp; <span style="font-size: 17.5px;">{{(serverListesFactures.data.api.data.queryListFactures.sum(`debit`) - serverListesFactures.data.api.data.queryListFactures.sum(`credit`)).formatCurrency(' ', ' ', ' ', 0)}}</span></h5>
+                </div>
+                <div class="d-flex">
+                    <h5 id="MontanAffecte">Montant Affectees :&nbsp;&nbsp; <a id="MontantAffecteValue" is="dmx-link" href="#">0</a></h5>
+                </div>
+
+
+            </div>
+
+            <div class="offset-1 col-4">
+                <div class="d-flex">
+                    <h5 id="difference" class="text-danger">
+                        Diferrence :&nbsp; &nbsp; <small id="DiferrenceValue" class="text-danger"></small></h5>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-4 mb-5 pt-2 pb-0 bg-light rounded-2 border-warning">
+            <div class="col-12">
+                <div class="d-flex">
+                    <div class="form-group w-100 mb-3">
+                        <button id="btn4" class="btn me-5 btn-sm w-25 fw-bold lh-lg text-uppercase text-white bg-success" is="dmx-button" value="" type="button" dmx-on:click="modal1.toggle();modal1.form1.total.setValue(montantLiquide.value.toNumber()+MontantCheque.value.toNumber());local1.set('argmt_cash',montantLiquide.value);local1.set('argbanque',banque.value);local1.set('id_contrat',input1.value);local1.set('argmt_cheque',MontantCheque.value);local1.set('argmvtpaye_tx',VarListFactures.value);local1.set('argusermaj',47433);local1.set('argno_doc',NroDoc.value)">Mise A jour</button>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input ms-5" type="checkbox" id="input5" name="input5" is="dmx-checkbox" value="">
+                            <label class="form-check-label" for="input5">Imprimer Recu</label>
+                        </div><button id="btn3" class="btn ms-5 me-5 w-25 lh-lg text-uppercase fw-bold bg-danger text-light btn-sm style76" is="dmx-button" value="" type="button">Fermer</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
 </div>
 
 
@@ -350,10 +368,15 @@ javascript:window.open('/Visualisation/Recherche','','width=700px, height=450px,
  });
     function loadOtherPage() {
 
-    $("<iframe>")                             // create a new iframe element
+   $("<iframe>")                             // create a new iframe element
         .hide()                               // make it invisible
         .attr("src", "/reports/recu.html") // point the iframe to the page you want to print
         .appendTo("body");                    // add iframe to the DOM to cause it to load the page
+        
+        /* $("<iframe>")                             // create a new iframe element
+        .hide()                               // make it invisible
+        .attr("src", "/Report/RecuReport.js") // point the iframe to the page you want to print
+        .appendTo("body");                    // add iframe to the DOM to cause it to load the page*/
 
 }
 
