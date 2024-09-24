@@ -63,6 +63,27 @@
           }
         },
         "name": "argmvtpaye_tx"
+      },
+      {
+        "type": "text",
+        "options": {
+          "rules": {
+            "core:required": {}
+          }
+        },
+        "name": "argmode_paimnt"
+      },
+      {
+        "type": "text",
+        "name": "arg_totcr"
+      },
+      {
+        "type": "text",
+        "name": "arg_nomfenetre"
+      },
+      {
+        "type": "text",
+        "name": "arg_checkassign"
       }
     ],
     "$_PARAM": [
@@ -93,6 +114,22 @@
       {
         "type": "text",
         "name": "argmvtpaye_tx"
+      },
+      {
+        "type": "text",
+        "name": "argmode_paimnt"
+      },
+      {
+        "type": "boolean",
+        "name": "arg_checkassign"
+      },
+      {
+        "type": "text",
+        "name": "arg_totcr"
+      },
+      {
+        "type": "text",
+        "name": "arg_nomfenetre"
       }
     ]
   },
@@ -104,7 +141,7 @@
       "options": {
         "connection": "postgres",
         "sql": {
-          "query": "select * from Fc_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7)",
+          "query": "select * from Fc_encaissement12(:P1,:P2,:P3,:P4,:P5,:P6,:P7,:P8,:P9,:P10,:P11)",
           "params": [
             {
               "name": ":P1",
@@ -140,6 +177,26 @@
               "name": ":P7",
               "value": "{{$_PARAM.argmvtpaye_tx}}",
               "test": "F§202305006100§14§0¿"
+            },
+            {
+              "name": ":P8",
+              "value": "{{$_GET.argmode_paimnt}}",
+              "test": "0"
+            },
+            {
+              "name": ":P9",
+              "value": "{{$_GET.arg_checkassign}}",
+              "test": "false"
+            },
+            {
+              "name": ":P10",
+              "value": "{{$_GET.arg_totcr}}",
+              "test": "0"
+            },
+            {
+              "name": ":P11",
+              "value": "{{$_GET.arg_nomfenetre}}",
+              "test": "frmautrecashmvmt"
             }
           ]
         },

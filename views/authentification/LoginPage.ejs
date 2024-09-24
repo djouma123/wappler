@@ -1,11 +1,11 @@
 <!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="LoginPage" appConnect="local" components="{dmxBrowser:{},dmxNotifications:{}}" -->
 <dmx-notifications id="notifies1"></dmx-notifications>
 <div is="dmx-browser" id="browser1"></div>
-<meta name="ac:route" content="/authentification/LoginPage">
+<meta name="ac:route" content="/">
 <div class="container pb-5"></div>
 <div class="mt-0 container-fluid border-dark text-center gx-2 gy-1 w-auto col d-flex justify-content-center align-items-center">
     <div class="row mb-3">
-        <form id="login1" method="post" is="dmx-serverconnect-form" action="/api/Login/ApiLogin" dmx-on:success="browser1.goto('/Encaissement/Encaissement_facture')" dmx-on:error="notifies1.danger(lastError.response.message)">
+        <form id="login1" method="post" is="dmx-serverconnect-form" action="/api/Login/ApiLogin" dmx-on:success="browser1.goto('/Encaissement/ENCSS_FACTURE')" dmx-on:error="notifies1.danger(lastError.response.message)">
             <div class="row border border-secondary">
                 <div class="col-12 col-md-8 text-start col-lg-12 col-xl-12">
                     <div class="row">

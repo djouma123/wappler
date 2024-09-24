@@ -25,7 +25,7 @@
 
 <body id="recu" is="dmx-app" dmx-on:load="run([{serverConnect:{name:'sc',outputType:'object',url:'/api/Encaissement/ReportRequeteMvt',site:'EncaissementWapApi',params:{id_contrat:`local1.data.id_contrat`,argmt_cash:`local1.data.argmt_cash`,argmt_cheque:`local1.data.argmt_cheque`,argno_doc:`local1.data.argno_doc`,argbanque:`local1.data.argbanque`,argusermaj:`local1.data.argusermaj`,argmvtpaye_tx:`local1.data.argmvtpaye_tx.replace(\'&quot;\',\'\')`}}},{runJS:{outputType:'text',function:'load'}},{runJS:{outputType:'text',function:'javascript:window.addEventListener(\'afterprint\', (event) =&gt; {  console.log(\'After print\');});'}}])" class="style3">
     <dmx-array id="arr1"></dmx-array>
-    <dmx-serverconnect id="serverconnect1" url="/api/Encaissement/ReportRequeteMvt" dmx-param:id_contrat="local1.data.id_contrat" dmx-param:argmt_cash="local1.data.argmt_cash" dmx-param:argmt_cheque="local1.data.argmt_cheque" dmx-param:argno_doc="local1.data.argno_doc" dmx-param:argbanque="local1.data.argbanque" dmx-param:argusermaj="local1.data.argusermaj" dmx-param:argmvtpaye_tx="local1.data.argmvtpaye_tx.replace('&quot;', '')"></dmx-serverconnect>
+    <dmx-serverconnect id="serverconnect1" url="/api/Encaissement/ReportRequeteMvt" dmx-param:id_contrat="local1.data.id_contrat" dmx-param:argmt_cash="local1.data.argmt_cash" dmx-param:argmt_cheque="local1.data.argmt_cheque" dmx-param:argno_doc="local1.data.argno_doc" dmx-param:argbanque="local1.data.argbanque" dmx-param:argusermaj="local1.data.argusermaj" dmx-param:argmvtpaye_tx="local1.data.argmvtpaye_tx.replace('&quot;', '')" dmx-param:argmode_paimnt="local1.data.argmode_paimnt" dmx-param:arg_checkassign="local1.data.arg_checkassign" dmx-param:arg_totcr="local1.data.arg_totcr" dmx-param:arg_nomfenetre="local1.data.arg_nomfenetre"></dmx-serverconnect>
     <dmx-local-manager id="local1"></dmx-local-manager>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-value id="dateVar" dmx-bind:value="var1.datetime"></dmx-value>
@@ -114,27 +114,6 @@
             <div class="row">
 
                 <div class="col-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>N Piece</th>
-                                <th>Date</th>
-                                <th>Type Mouvement</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="serverconnect1.data.LigneMvt" id="tableRepeat1">
-                            <tr>
-                                <td dmx-text="trid_1"></td>
-                                <td dmx-text="trdate_1"></td>
-                                <td dmx-text="libelle_type_mvt_1"></td>
-                                <td dmx-text="d_1"></td>
-                                <td dmx-text="c_1"></td>
-
-                            </tr>
-                        </tbody>
-                    </table>
 
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">

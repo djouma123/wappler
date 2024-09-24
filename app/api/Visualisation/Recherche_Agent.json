@@ -125,7 +125,8 @@
           "name": "type_role",
           "type": "number"
         }
-      ]
+      ],
+      "outputType": "array"
     }
   }
 }

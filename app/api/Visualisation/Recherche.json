@@ -6,16 +6,12 @@
         "name": "searchtype"
       },
       {
-        "type": "number",
-        "name": "typerole"
-      },
-      {
         "type": "text",
         "name": "searchcreteria"
       },
       {
         "type": "number",
-        "name": "rechcertype"
+        "name": "typerole"
       },
       {
         "type": "number",
@@ -48,7 +44,7 @@
                   {
                     "name": ":P2",
                     "value": "{{$_GET.searchcreteria}}",
-                    "test": "AND CL.NUM_PORTABLE =  77832308"
+                    "test": "AND CL.NOM LIKE  '%DJOUMA%'"
                   },
                   {
                     "name": ":P3",
@@ -149,8 +145,7 @@
                 "name": "inst_phys",
                 "type": "text"
               }
-            ],
-            "outputType": "array"
+            ]
           }
         },
         "else": {
@@ -166,17 +161,20 @@
                   {
                     "name": "?",
                     "value": "{{$_GET.searchtype}}",
-                    "test": "2"
+                    "test": "2",
+                    "recid": 1
                   },
                   {
                     "name": "0",
                     "value": "{{$_GET.searchcreteria}}",
-                    "test": "and CL.NUM_PORTABLE = 77832308"
+                    "test": "and CL.NUM_PORTABLE = 77832308",
+                    "recid": 2
                   },
                   {
                     "name": "?",
                     "value": "{{$_GET.typerole}}",
-                    "test": "0"
+                    "test": "0",
+                    "recid": 3
                   }
                 ]
               }
